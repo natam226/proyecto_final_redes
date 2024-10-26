@@ -1,0 +1,6 @@
+Flask
+requests
+pandas
+plotly
+Flask_cors
+

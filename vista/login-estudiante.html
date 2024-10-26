@@ -1,0 +1,217 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Estudiante</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Roboto', sans-serif; /* Fuente moderna */
+        }
+        .container {
+            margin-top: 80px;
+        }
+        .form-group input {
+            padding: 15px;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #0062E6, #33AEFF);
+            border: none;
+            padding: 15px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #002f5f, #0677bd);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .login-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        .error-message {
+            color: #dc3545; /* Rojo para mensajes de error */
+        }
+        .text-center p a {
+            color: #0062E6;
+            text-decoration: none;
+        }
+        .text-center p a:hover {
+            color: #33AEFF;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="login-container">
+                    <h2 class="text-center">Login Estudiante</h2>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="usuario">Usuario:</label>
+                            <input type="text" class="form-control" id="usuario" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contrasena">Contraseña:</label>
+                            <input type="password" class="form-control" id="contrasena" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+                        <div id="error-message" class="text-center mt-3 error-message" style="display: none;"></div>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>¿No tienes cuenta? <a href="crear-usuario-estudiante.html">Crea una</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#loginForm').on('submit', function(e) {
+                e.preventDefault();
+                const usuario = $('#usuario').val();
+                const contrasena = encodeURIComponent($('#contrasena').val());
+
+                $.get(`http://usuarios:3005/estudiantes/${usuario}/${contrasena}`)
+                    .done(function(response) {
+                        if (response && Object.keys(response).length > 0) {
+                            localStorage.setItem('usuario', usuario);
+                            window.location.href = `cursos-inscritos.html`;
+                        } else {
+                            $('#error-message').text('Usuario o contraseña incorrectos').show();
+                        }
+                    })
+                    .fail(function() {
+                        $('#error-message').text('Error al conectar con el servidor').show();
+                    });
+            });
+        });
+    </script>
+</body>
+</html>
+=======
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Estudiante</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Roboto', sans-serif; /* Fuente moderna */
+        }
+        .container {
+            margin-top: 80px;
+        }
+        .form-group input {
+            padding: 15px;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #0062E6, #33AEFF);
+            border: none;
+            padding: 15px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #002f5f, #0677bd);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .login-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        .error-message {
+            color: #dc3545; /* Rojo para mensajes de error */
+        }
+        .text-center p a {
+            color: #0062E6;
+            text-decoration: none;
+        }
+        .text-center p a:hover {
+            color: #33AEFF;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="login-container">
+                    <h2 class="text-center">Login Estudiante</h2>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="usuario">Usuario:</label>
+                            <input type="text" class="form-control" id="usuario" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contrasena">Contraseña:</label>
+                            <input type="password" class="form-control" id="contrasena" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+                        <div id="error-message" class="text-center mt-3 error-message" style="display: none;"></div>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>¿No tienes cuenta? <a href="crear-usuario-estudiante.html">Crea una</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#loginForm').on('submit', function(e) {
+                e.preventDefault();
+                const usuario = $('#usuario').val();
+                const contrasena = encodeURIComponent($('#contrasena').val());
+
+                $.get(`http://192.168.100.3:3005/estudiantes/${usuario}/${contrasena}`)
+                    .done(function(response) {
+                        if (response && Object.keys(response).length > 0) {
+                            localStorage.setItem('usuario', usuario);
+                            window.location.href = `cursos-inscritos.html`;
+                        } else {
+                            $('#error-message').text('Usuario o contraseña incorrectos').show();
+                        }
+                    })
+                    .fail(function() {
+                        $('#error-message').text('Error al conectar con el servidor').show();
+                    });
+            });
+        });
+    </script>
+</body>
+</html>
+>>>>>>> main
