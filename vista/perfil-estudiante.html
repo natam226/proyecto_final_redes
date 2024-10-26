@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil del Estudiante</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #0062E6;
+            padding-top: 30px;
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 15px 0 0 15px;
+            z-index: 1000;
+        }
+        .sidebar a {
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            border-radius: 5px;
+            margin: 15px 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-weight: bold;
+        }
+        .sidebar a:hover {
+            background-color: #0062E6;
+            transform: translateX(10px);
+        }
+        .content {
+            margin-right: 250px;
+            padding: 20px;
+        }
+        .sidebar .navbar-brand {
+            font-size: 24px;
+            text-align: center;
+            display: block;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px; /* Espacio entre los campos */
+        }
+        .container {
+            margin-top: 80px;
+        }
+        .form-group {
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            margin-bottom: 30px;
+            color: #000000;
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #0062E6;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0062E6;
+        }
+        .btn-success {
+            background-color: #0062E6;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .btn-success:hover {
+            background-color: #003366;
+            transform: translateY(-2px);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="perfil-estudiante.html">Perfil Estudiante</a>
+        <a href="matricular.html">Matricular</a>
+        <a href="cursos-inscritos.html">Cursos Inscritos</a>
+        <a href="info-academica.html">Información Académica</a>
+        <a href="pensum.html">Pénsum</a>
+        <a href="metricas-estudiantes.html">Métricas</a>
+        <a href="cerrar-sesion.html">Cerrar Sesión</a>
+    </div>
+    <div class="content">
+        <div class="container">
+            <h2>Perfil del Estudiante</h2>
+            <form id="studentForm">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="correo">Correo</label>
+                    <input type="email" class="form-control" id="correo" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="paisOrigen">País de Origen</label>
+                    <input type="text" class="form-control" id="paisOrigen" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="necesidadesEspecialesEducacion">Necesidades Especiales en Educación</label>
+                    <select class="form-control" id="necesidadesEspecialesEducacion" disabled>
+                        <option value="si">Sí</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="genero">Género</label>
+                    <select class="form-control" id="genero" disabled>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="estadoCivil">Estado Civil</label>
+                    <select class="form-control" id="estadoCivil" disabled>
+                        <option value="Soltero">Soltero</option>
+                        <option value="Casado">Casado</option>
+                        <option value="Divorciado">Divorciado</option>
+                        <option value="Viudo">Viudo</option>
+                        <option value="Union libre">Unión libre</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="prestamo">Préstamo</label>
+                    <select class="form-control" id="prestamo" disabled>
+                        <option value="si">Sí</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="beca">Beca</label>
+                    <select class="form-control" id="beca" disabled>
+                        <option value="si">Sí</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="desplazado">Desplazado</label>
+                    <select class="form-control" id="desplazado" disabled>
+                        <option value="si">Sí</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-primary" id="editButton">Editar</button>
+                <button type="button" class="btn btn-success" id="saveButton" style="display: none;">Guardar</button>
+            </form>
+            <div id="error-message" class="mt-3 text-danger" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const usuario = localStorage.getItem('usuario');
+
+            if (!usuario) {
+                alert('Usuario no autenticado. Redirigiendo al inicio de sesión.');
+                window.location.href = 'login-estudiante.html';
+                return;
+            }
+
+            // Cargar los datos del estudiante
+            fetch(`http://usuarios:3005/estudiantes/${usuario}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error en la solicitud');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById('nombre').value = data.nombre;
+                    document.getElementById('correo').value = data.correo;
+                    document.getElementById('paisOrigen').value = data.paisOrigen;
+                    document.getElementById('necesidadesEspecialesEducacion').value = data.necesidadesEspecialesEducacion;
+                    document.getElementById('genero').value = data.genero;
+                    document.getElementById('estadoCivil').value = data.estadoCivil;
+                    document.getElementById('prestamo').value = data.prestamo;
+                    document.getElementById('beca').value = data.beca;
+                    document.getElementById('desplazado').value = data.desplazado;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('error-message').textContent = `Error: ${error.message}`;
+                    document.getElementById('error-message').style.display = 'block';
+                });
+
+            // Editar perfil
+            document.getElementById('editButton').addEventListener('click', () => {
+                const fields = document.querySelectorAll('#studentForm input, #studentForm select');
+                fields.forEach(field => field.disabled = false);
+                document.getElementById('editButton').style.display = 'none';
+                document.getElementById('saveButton').style.display = 'inline-block';
+            });
+
+            // Guardar cambios
+            document.getElementById('saveButton').addEventListener('click', () => {
+                const updatedData = {
+                    nombre: document.getElementById('nombre').value,
+                    correo: document.getElementById('correo').value,
+                    paisOrigen: document.getElementById('paisOrigen').value,
+                    necesidadesEspecialesEducacion: document.getElementById('necesidadesEspecialesEducacion').value,
+                    genero: document.getElementById('genero').value,
+                    estadoCivil: document.getElementById('estadoCivil').value,
+                    prestamo: document.getElementById('prestamo').value,
+                    beca: document.getElementById('beca').value,
+                    desplazado: document.getElementById('desplazado').value,
+                };
+
+                fetch(`http://usuarios:3005/estudiantes/${usuario}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(updatedData)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al guardar los cambios');
+                    }
+                    alert('Perfil actualizado con éxito.');
+                    location.reload(); // Recargar para mostrar los datos actualizados
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('error-message').textContent = `Error: ${error.message}`;
+                    document.getElementById('error-message').style.display = 'block';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

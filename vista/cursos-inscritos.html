@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos Inscritos Periodo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+        /* Sidebar */
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #0062E6;
+            padding-top: 30px;
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 15px 0 0 15px;
+            z-index: 1000;
+        }
+        .sidebar a {
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            border-radius: 5px;
+            margin: 15px 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-weight: bold;
+        }
+        .sidebar a:hover {
+            background-color: #0062E6;
+            transform: translateX(10px);
+        }
+        .content {
+            margin-right: 250px;
+            padding: 20px;
+            width: calc(100% - 250px);
+        }
+        h5 {
+            margin-bottom: 30px;
+            color: #000000;
+            font-weight: bold;
+        }
+        h1 {
+            margin-bottom: 30px;
+            color: #000000;
+            font-weight: bold;
+        }
+        .sidebar .navbar-brand {
+            font-size: 24px;
+            text-align: center;
+            display: none;
+        }
+        table {
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th {
+            background-color: #0062E6;
+            color: white;
+            padding: 15px;
+            font-size: 16px;
+        }
+        td {
+            padding: 15px;
+            color: #343a40;
+            font-size: 14px;
+        }
+        td a {
+            margin-left: 10px;
+            font-size: 14px;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="perfil-estudiante.html">Perfil Estudiante</a>
+        <a href="matricular.html">Matricular</a>
+        <a href="cursos-inscritos.html">Cursos Inscritos</a>
+        <a href="info-academica.html">Información académica</a>
+        <a href="pensum.html">Pénsum</a>
+        <a href="metricas-estudiantes.html">Métricas</a>
+        <a href="cerrar-sesion.html">Cerrar sesión</a>
+    </div>
+
+    <div class="content">
+        <div class="container mt-5">
+            <h1>Cursos Inscritos</h1>
+            <h5>2024-3</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Curso</th>
+                        <th>Grupo</th>
+                        <th>Profesor</th>
+                        <th>Nota</th>
+                    </tr>
+                </thead>
+                <tbody id="cursosBody">
+                    <!-- Aquí se cargarán los cursos -->
+                </tbody>
+            </table>
+            <div id="noCursos" class="alert alert-info" style="display: none;">
+                No hay cursos inscritos.
+            </div>
+        </div>
+        <script>
+            $(document).ready(function() {
+                // Verificar la sesión del usuario
+                const usuario = localStorage.getItem('usuario'); // Obtener el usuario del localStorage
+
+                if (!usuario) {
+                    alert('Usuario no autenticado. Redirigiendo al inicio de sesión.');
+                    window.location.href = 'login-estudiante.html'; // Redirigir al login
+                    return;
+                }
+
+                // Obtener información del estudiante
+                fetch(`http://usuarios:3005/estudiantes/${usuario}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('No se pudo obtener la información del estudiante');
+                        }
+                        return response.json();
+                    })
+                    .then(estudiante => {
+                        const nombreEstudiante = estudiante.nombre; // Usar el nombre del estudiante
+                        // Cargar cursos inscritos
+                        cargarCursosInscritos(nombreEstudiante);
+                    })
+                    .catch(error => {
+                        console.error('Error al obtener la información del estudiante:', error);
+                        alert('Error al obtener la información del estudiante');
+                    });
+
+                // Función para cargar los cursos inscritos
+                function cargarCursosInscritos(nombreEstudiante) {
+                    if (!nombreEstudiante) {
+                        alert('No se ha encontrado el nombre del estudiante.');
+                        return;
+                    }
+
+                    // Solicitar los cursos desde el endpoint
+                    $.get(`http://cursos:3007/cursos/estudiante/${nombreEstudiante}/actual`)
+                        .done(function(data) {
+                            console.log('Datos recibidos:', data); // Verifica la respuesta
+                            let tableBody = $('#cursosBody');
+                            tableBody.empty(); // Limpiar la tabla antes de agregar filas
+                            if (data && data.length > 0) {
+                                data.forEach(curso => {
+                                    tableBody.append(`
+                                        <tr>
+                                            <td>${curso.nombreCurso}</td>
+                                            <td>${curso.grupo}</td>
+                                            <td>${curso.profesor}</td>
+                                            <td>${curso.nota ? curso.nota : 'N/A'}</td>
+                                        </tr>
+                                    `);
+                                });
+                                $('#noCursos').hide(); // Ocultar el mensaje si hay cursos
+                            } else {
+                                $('#noCursos').show(); // Mostrar mensaje si no hay cursos
+                            }
+                        })
+                        .fail(function(jqXHR) {
+                            if (jqXHR.status === 404) {
+                                $('#noCursos').show(); // Mostrar mensaje si no hay cursos
+                            } else {
+                                console.error('Error al cargar cursos inscritos:', jqXHR);
+                                $('#noCursos').text('Error al cargar cursos inscritos').show(); // Mostrar error general
+                            }
+                        });
+                }
+            });
+        </script>
+    </div>
+</body>
+</html>
