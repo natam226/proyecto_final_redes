@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 <!DOCTYPE html>
 <html lang="es">
@@ -142,4 +143,150 @@
     </script>
     
 </body>
+=======
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Usuario Profesor</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Roboto', sans-serif;
+        }
+        .container {
+            margin-top: 80px;
+        }
+        .form-group input, .form-group select {
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .form-control {
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #002f5f, #0677bd);
+            border: none;
+            padding: 15px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #0062E6, #33AEFF);
+        }
+        .signup-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="signup-container">
+                    <h2 class="text-center">Crear Usuario Profesor</h2>
+                    <form id="createUserForm">
+                        <div class="form-group">
+                            <label for="usuario">Usuario:</label>
+                            <input type="text" class="form-control" id="usuario" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contrasena">Contraseña:</label>
+                            <input type="password" class="form-control" id="contrasena" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="rol">Rol:</label>
+                            <select class="form-control" id="rol" required>
+                                <option value="" disabled selected></option>
+                                <option value="Profesor">Profesor</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre">Nombre:</label>
+                            <input type="text" class="form-control" id="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="correo">Correo:</label>
+                            <input type="email" class="form-control" id="correo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ultimoGradoDeFormacion">Último Grado de Formación:</label>
+                            <select class="form-control" id="ultimoGradoDeFormacion" required>
+                                <option value="" disabled selected></option>
+                                <option value="Bachiller">Bachiller</option>
+                                <option value="Pregrado">Pregrado</option>
+                                <option value="Maestria">Maestría</option>
+                                <option value="Doctorado">Doctorado</option>
+                                <option value="Especializacion">Especialización</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Crear Usuario</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#createUserForm').on('submit', function(e) {
+                e.preventDefault();
+    
+                const usuario = $('#usuario').val().trim();
+                const contrasena = $('#contrasena').val().trim();
+                const rol = $('#rol').val();
+                const nombre = $('#nombre').val().trim();
+                const correo = $('#correo').val().trim();
+                const ultimoGradoDeFormacion = $('#ultimoGradoDeFormacion').val();
+    
+                // Validación adicional para verificar que los campos no estén vacíos
+                if (!usuario || !contrasena || !nombre || !correo || !ultimoGradoDeFormacion) {
+                    alert('Por favor, completa todos los campos.');
+                    return;
+                }
+    
+                // Utiliza $.ajax para tener mayor control sobre la petición
+                $.ajax({
+                    url: 'http://192.168.100.3:3005/profesores',
+                    type: 'POST',
+                    contentType: 'application/json',  // Especifica el tipo de contenido JSON
+                    data: JSON.stringify({
+                        usuario: usuario,
+                        contrasena: contrasena,
+                        rol: rol,
+                        nombre: nombre,
+                        correo: correo,
+                        ultimoGradoDeFormacion: ultimoGradoDeFormacion
+                    }),
+                    success: function(response) {
+                        alert('Usuario creado exitosamente');
+                        window.location.href = 'login-profesor.html'; // Redirige al login del profesor
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                        alert('Error al crear el usuario');
+                    }
+                });
+            });
+        });
+    </script>
+    
+</body>
+>>>>>>> main
 </html>

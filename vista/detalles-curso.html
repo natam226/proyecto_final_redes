@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -80,4 +81,88 @@
         });
     </script>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Curso</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .content {
+            padding: 20px;
+        }
+        h2 {
+            margin-bottom: 30px;
+            color: #003366;
+            font-weight: bold;
+        }
+        table {
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th {
+            background-color: #003366;
+            color: white;
+            padding: 15px;
+            font-size: 16px;
+        }
+        td {
+            padding: 15px;
+            color: #343a40;
+            font-size: 14px;
+        }
+        td a {
+            margin-right: 10px;
+            font-size: 14px;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content">
+        <h2 class="text-center">Detalles del Curso</h2>
+        <table class="table table-striped" id="studentsTable">
+            <thead>
+                <tr>
+                    <th>Nombre del Estudiante</th>
+                    <th>Correo</th>
+                    <th>Nota</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Se cargan los estudiantes aquí -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            const estudiantes = JSON.parse(localStorage.getItem('estudiantes'));
+            let tableContent = '';
+            estudiantes.forEach(est => {
+                const nota = est.nota !== null ? est.nota : 'sin nota'; // Cambiar null por 'sin nota'
+                tableContent += `
+                    <tr>
+                        <td>${est.nombre}</td>
+                        <td>${est.correo}</td>
+                        <td>${nota}</td>
+                    </tr>`;
+            });
+            $('#studentsTable tbody').html(tableContent);
+        });
+    </script>
+</body>
+>>>>>>> main
 </html>
