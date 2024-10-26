@@ -12,24 +12,24 @@ services:
       - ./databases/usuariosDB/:/docker-entrypoint-initdb.d
 
   cursosDB:
-  image: mysql:5.6
-  ports:
-    - "32001:3306"
-  environment:
-    - MYSQL_ROOT_PASSWORD=password
-    - MYSQL_DATABASE=cursosDB
-  volumes:
-    - ./databases/cursosDB/:/docker-entrypoint-initdb.d
+    image: mysql:5.6
+    ports:
+      - "32001:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=cursosDB
+    volumes:
+      - ./databases/cursosDB/:/docker-entrypoint-initdb.d
 
   asignaturasDB:
-  image: mysql:5.6
-  ports:
-    - "32002:3306"
-  environment:
-    - MYSQL_ROOT_PASSWORD=password
-    - MYSQL_DATABASE=asignaturasDB
-  volumes:
-    - ./databases/asignaturasDB/:/docker-entrypoint-initdb.d
+    image: mysql:5.6
+    ports:
+      - "32002:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=asignaturasDB
+    volumes:
+      - ./databases/asignaturasDB/:/docker-entrypoint-initdb.d
 
   usuarios:
     image: microusuarios
