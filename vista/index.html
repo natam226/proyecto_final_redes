@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -144,4 +145,152 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido a Nuestra Institución</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Roboto', sans-serif;
+        }
+        .navbar-custom {
+            background-color: #003366;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-custom .navbar-brand, .navbar-custom .navbar-nav .nav-link {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .navbar-custom .nav-link:hover {
+            color: #cccccc;
+        }
+        .dropdown-menu {
+            min-width: 180px; /* Ajusta según el contenido */
+            white-space: nowrap; /* Evita que el texto se divida */
+            width: auto; /* Ajusta automáticamente el tamaño del menú */
+            position: absolute; /* Asegura que se superponga adecuadamente */
+            transform: translateX(-60%); /* Centra el menú con respecto al botón */
+            right: 0;
+        }
+        .header-section {
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            color: rgb(0, 0, 0);
+            text-align: center;
+        }
+        .header-section h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        .header-section p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+        }
+        .btn-custom {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            margin: 0 10px;
+            font-weight: 600;
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #0062E6, #33AEFF);
+            border: none;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #0056b3, #268ecf);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .btn-secondary-custom {
+            background: linear-gradient(90deg, #002f5f, #0677bd);
+            border: none;
+            color: white;
+        }
+        .btn-secondary-custom:hover {
+            background: linear-gradient(90deg, #0056b3, #268ecf);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        .container-info {
+            background-color: white;
+            padding: 40px;
+            margin-top: 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .container-info:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+        .footer {
+            background-color: #003366;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+            border-radius: 8px;
+        }
+        .footer a {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <a class="navbar-brand" href="#">Institución</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="perfilDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Escoger perfil
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="perfilDropdown">
+                        <a class="dropdown-item" href="login-estudiante.html">Estudiante</a>
+                        <a class="dropdown-item" href="login-profesor.html">Profesor/Directivo</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="header-section">
+        <div class="container">
+            <h1>Bienvenido a Nuestra Institución</h1>
+            <p>Ofrecemos una educación de calidad con un enfoque integral para estudiantes y profesionales.</p>
+            <a href="login-estudiante.html" class="btn btn-primary btn-custom">Estudiante</a>
+            <a href="login-profesor.html" class="btn btn-secondary-custom btn-custom">Profesor/Directivo</a>
+        </div>
+    </section>
+
+    <div class="container container-info mt-5">
+        <div class="row">
+            <div class="col-md-12 mx-auto">
+                <h2>Sobre Nosotros</h2>
+                <p>Nuestra institución se dedica a proporcionar una educación de calidad que forma a los líderes del mañana. Con un equipo de profesionales altamente capacitados, ofrecemos programas académicos que van desde la educación técnica hasta la formación avanzada.</p>
+                <p>Contamos con una infraestructura moderna y una amplia gama de servicios para apoyar a nuestros estudiantes en su camino hacia el éxito académico y profesional.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer mt-5">
+        <p>&copy; 2024 Institución Educativa</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+>>>>>>> main
 </html>
