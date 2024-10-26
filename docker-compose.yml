@@ -9,7 +9,7 @@ services:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=usuariosDB
     volumes:
-      - ./db/usuariosDB/:/docker-entrypoint-initdb.d
+      - ./databases/usuariosDB/:/docker-entrypoint-initdb.d
 
   cursosDB:
   image: mysql:5.6
@@ -19,7 +19,7 @@ services:
     - MYSQL_ROOT_PASSWORD=password
     - MYSQL_DATABASE=cursosDB
   volumes:
-    - ./db/cursosDB/:/docker-entrypoint-initdb.d
+    - ./databases/cursosDB/:/docker-entrypoint-initdb.d
 
   asignaturasDB:
   image: mysql:5.6
@@ -29,7 +29,7 @@ services:
     - MYSQL_ROOT_PASSWORD=password
     - MYSQL_DATABASE=asignaturasDB
   volumes:
-    - ./db/asignaturasDB/:/docker-entrypoint-initdb.d
+    - ./databases/asignaturasDB/:/docker-entrypoint-initdb.d
 
   usuarios:
     image: microusuarios
