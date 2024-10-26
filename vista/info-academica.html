@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información Académica</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tablesorter@2.31.1/js/jquery.tablesorter.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #0062E6;
+            padding-top: 30px;
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 15px 0 0 15px;
+            z-index: 1000;
+        }
+        .sidebar a {
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            border-radius: 5px;
+            margin: 15px 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-weight: bold;
+        }
+        .sidebar a:hover {
+            background-color: #0062E6;
+            transform: translateX(10px);
+        }
+        .content {
+            margin-right: 250px;
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 30px;
+            color: #000000;
+            font-weight: bold;
+        }
+        table {
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th {
+            background-color: #0062E6;
+            color: white;
+            padding: 15px;
+            font-size: 16px;
+        }
+        td {
+            padding: 15px;
+            color: #343a40;
+            font-size: 14px;
+        }
+        td a {
+            margin-left: 10px;
+            font-size: 14px;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="perfil-estudiante.html">Perfil Estudiante</a>
+        <a href="matricular.html">Matricular</a>
+        <a href="cursos-inscritos.html">Cursos Inscritos</a>
+        <a href="info-academica.html">Información Académica</a>
+        <a href="pensum.html">Pénsum</a>
+        <a href="metricas-estudiantes.html">Métricas</a>
+        <a href="cerrar-sesion.html">Cerrar sesión</a>
+    </div>
+
+    <div class="content">
+        <div class="container mt-5">
+            <h1>Información Académica</h1>
+            <table class="table tablesorter">
+                <thead>
+                    <tr>
+                        <th>Curso</th>
+                        <th>Grupo</th>
+                        <th>Profesor</th>
+                        <th>Nota</th>
+                        <th>Periodo</th>
+                    </tr>
+                </thead>
+                <tbody id="cursosBody">
+                    <!-- Aquí se cargarán los cursos pasados -->
+                </tbody>
+            </table>
+        </div>
+        
+        <script>
+            $(document).ready(function() {
+                // Función para verificar la sesión
+                function verificarSesion() {
+                    const usuarioEstudiante = localStorage.getItem('usuario');
+                    if (!usuarioEstudiante) {
+                        console.error("No se encontró el usuario en la sesión");
+                        window.location.href = 'login-estudiante.html';
+                    }
+                    return usuarioEstudiante;
+                }
+
+                // Función para cargar información del estudiante
+                function obtenerInformacionEstudiante(usuarioEstudiante) {
+                    console.log("Obteniendo información del estudiante:", usuarioEstudiante);
+                    return $.get(`http://192.168.100.3:3005/estudiantes/${usuarioEstudiante}`)
+                        .then(data => data.nombre)
+                        .catch((error) => {
+                            console.error('Error al obtener la información del estudiante:', error);
+                            alert('Error al obtener la información del estudiante.');
+                            return null;
+                        });
+                }
+
+                // Función para cargar cursos pasados
+                function cargarCursosPasados(nombreEstudiante) {
+                    if (!nombreEstudiante) {
+                        alert('No se ha encontrado el nombre del estudiante.');
+                        return;
+                    }
+
+                    console.log("Cargando cursos pasados para:", nombreEstudiante);
+
+                    $.get(`http://192.168.100.3:3007/cursos/estudiante/${nombreEstudiante}/pasados`, function(data) {
+                        console.log('Datos recibidos:', data);
+                        let tableBody = $('#cursosBody');
+                        tableBody.empty(); // Limpiar el cuerpo de la tabla antes de agregar nuevas filas
+                        if (data && data.length > 0) {
+                            data.forEach(curso => {
+                                tableBody.append(`
+                                    <tr>
+                                        <td>${curso.nombreCurso}</td>
+                                        <td>${curso.grupo}</td>
+                                        <td>${curso.profesor}</td>
+                                        <td>${curso.nota}</td>
+                                        <td>${curso.periodo}</td>
+                                    </tr>
+                                `);
+                            });
+                        } else {
+                            tableBody.append(`
+                                <tr>
+                                    <td colspan="5">No hay cursos inscritos en periodos pasados</td>
+                                </tr>
+                            `);
+                        }
+                        // Inicializar el plugin de tablesorter después de cargar los datos
+                        $(".tablesorter").tablesorter();
+                    }).fail(function(jqXHR, textStatus, errorThrown) {
+                        console.error('Error al cargar cursos pasados:', textStatus, errorThrown);
+                        alert('Error al cargar cursos pasados');
+                    });
+                }
+
+                // Verificar sesión y cargar información del estudiante y cursos pasados
+                const usuarioEstudiante = verificarSesion();
+                if (usuarioEstudiante) {
+                    obtenerInformacionEstudiante(usuarioEstudiante).then(nombreEstudiante => {
+                        if (nombreEstudiante) {
+                            cargarCursosPasados(nombreEstudiante);
+                        } else {
+                            console.error("No se pudo obtener el nombre del estudiante");
+                        }
+                    });
+                }
+            });
+        </script>
+    </div>
+</body>
+</html>
