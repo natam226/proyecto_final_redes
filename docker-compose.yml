@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  usuariosDB:
+    image: mysql:5.6
+    ports:
+      - "32000:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=usuariosDB
+    volumes:
+      - ./db/usuariosDB/:/docker-entrypoint-initdb.d
+
+  cursosDB:
+  image: mysql:5.6
+  ports:
+    - "32001:3306"
+  environment:
+    - MYSQL_ROOT_PASSWORD=password
+    - MYSQL_DATABASE=cursosDB
+  volumes:
+    - ./db/cursosDB/:/docker-entrypoint-initdb.d
+
+  asignaturasDB:
+  image: mysql:5.6
+  ports:
+    - "32002:3306"
+  environment:
+    - MYSQL_ROOT_PASSWORD=password
+    - MYSQL_DATABASE=asignaturasDB
+  volumes:
+    - ./db/asignaturasDB/:/docker-entrypoint-initdb.d
+
+  usuarios:
+    image: microusuarios
+    build:
+      context: ./microservicios/usuarios
+    ports:
+      - "3005:3005"
+
+  asignaturas:
+    image: microasignaturas
+    build:
+      context: ./microservicios/asignaturas
+    ports:
+      - "3006:3006"
+
+  cursos:
+    image: microcursos
+    build:
+      context: ./microservicios/cursos
+    ports:
+      - "3007:3007"
+
+  graficas:
+    image: micrograficas
+    build:
+      context: ./microservicios/graficas
+    ports:
+      - "3008:3008"
+
+  haproxy:
+    image: haproxy:latest
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    ports:
+      - "80:80"
+
+  apache:
+    build:
+      context: ./vista
+    ports:
+      - "8080:80"
