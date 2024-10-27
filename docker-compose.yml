@@ -6,10 +6,11 @@ services:
     ports:
       - "3307:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD= 'password'
+      - MYSQL_ROOT_PASSWORD=password
     volumes:
       - ./databases/usuariosDB/:/docker-entrypoint-initdb.d
-      - mysql-data:/var/lib/mysql
+      - ./databases/mysql-data/import:/var/lib/mysql-files
+      - ../database_vol/mysql-asignaturas-data:/var/lib/mysql
     networks:
       - my-network
 
@@ -61,7 +62,8 @@ services:
       - my-network
 
   haproxy:
-    image: haproxy:latest
+    build:
+      context: ./haproxy
     volumes:
       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
     ports:
@@ -104,6 +106,3 @@ networks:
     driver: bridge
 
 volumes:
-  mysql-usuarios-data:
-  mysql-cursos-data:
-  mysql-asignaturas-data:

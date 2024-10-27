@@ -13,9 +13,13 @@ create table estudiantes(
 			beca ENUM('si','no'),
 			desplazado ENUM('si','no'),
 			primary key(usuario));
-			
-ALTER TABLE estudiantes
-ADD COLUMN totalCreditos INT DEFAULT 0;
+
+LOAD DATA INFILE '/var/lib/mysql-files/data_estudiantes.csv'
+INTO TABLE estudiantes
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
 	
 create table profesores (
 			usuario varchar(20),
@@ -26,7 +30,13 @@ create table profesores (
 			ultimoGradoDeFormacion ENUM('Bachiller', 'Pregrado', 'Maestria', 'Doctorado', 'Especializacion'),
 			primary key(usuario));
 
-
+LOAD DATA INFILE '/var/lib/mysql-files/data_profesores.csv'
+INTO TABLE profesores
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+	
 create database asignaturasDB;
 use asignaturasDB;
 create table asignaturas (
@@ -37,10 +47,16 @@ create table asignaturas (
 			semestre int,
 			primary key(id));
 
+LOAD DATA INFILE '/var/lib/mysql-files/data_asignaturas.csv'
+INTO TABLE asignaturas
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
 create database cursosDB;
 use cursosDB;
 create table cursos(
-id int auto_increment,
 nombreCurso varchar(70),
 grupo int,
 profesor varchar(50),
@@ -50,4 +66,10 @@ correoEstudiante varchar(50),
 nota float,
 periodo varchar(20),
 UNIQUE KEY unique_curso (nombreCurso, grupo, periodo, nombreEstudiante));
-		
+
+LOAD DATA INFILE '/var/lib/mysql-files/data_cursos.csv'
+INTO TABLE cursos
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
