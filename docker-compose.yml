@@ -65,7 +65,7 @@ services:
     build:
       context: ./haproxy
     volumes:
-      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
     ports:
       - "80:80"
     depends_on:
