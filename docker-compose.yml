@@ -1,0 +1,103 @@
+version: '3.8'
+
+services:
+  databases:
+    image: mysql:5.6
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - ./databases/:/docker-entrypoint-initdb.d
+      - ./databases/mysql-data/import:/var/lib/mysql-files
+      - ../database_vol/mysql-asignaturas-data:/var/lib/mysql
+    networks:
+      - my-network
+
+  usuarios:
+    build:
+      context: ./microservicios/usuarios
+    ports:
+      - "3005:3005"
+    depends_on:
+      - databases
+    networks:
+      - my-network
+
+  asignaturas:
+    build:
+      context: ./microservicios/asignaturas
+    ports:
+      - "3006:3006"
+    depends_on:
+      - databases
+    networks:
+      - my-network
+
+  cursos:
+    build:
+      context: ./microservicios/cursos
+    ports:
+      - "3007:3007"
+    depends_on:
+      - databases
+      - usuarios
+      - asignaturas
+    networks:
+      - my-network
+
+  graficas:
+    build:
+      context: ./microservicios/graficas
+    ports:
+      - "3008:3008"
+    depends_on:
+      - usuarios
+      - cursos
+    networks:
+      - my-network
+
+  haproxy:
+    build:
+      context: ./haproxy
+    volumes:
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    ports:
+      - "80:80"
+    depends_on:
+      - web1
+      - web2
+    networks:
+      - my-network
+
+  web1: 
+    build:
+      context: ./vista
+    ports:
+      - "8080:80"
+    depends_on:
+      - usuarios
+      - asignaturas
+      - cursos
+      - graficas
+    networks:
+      - my-network
+
+
+  web2: 
+    build:
+      context: ./vista
+    ports:
+      - "8081:80"
+    depends_on:
+      - usuarios
+      - asignaturas
+      - cursos
+      - graficas
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
+
