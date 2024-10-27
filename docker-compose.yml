@@ -105,4 +105,3 @@ networks:
   my-network:
     driver: bridge
 
-volumes:
