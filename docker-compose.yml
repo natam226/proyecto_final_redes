@@ -1,73 +1,108 @@
-version: '3.8'
-
 services:
-  usuariosDB:
-    image: mysql:5.6
+  usuariosdb:
+    image: mysql:5.7
+    container_name: usuariosdb
     ports:
       - "32000:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=usuariosDB
+      - MYSQL_DATABASE=usuariosdb
     volumes:
-      - ./databases/usuariosDB/:/docker-entrypoint-initdb.d
+     - ./db/usuariosdb/:/docker-entrypoint-initdb.d
 
-  cursosDB:
-    image: mysql:5.6
+  asignaturasdb:
+    image: mysql:5.7
+    container_name: asignaturasdb
     ports:
       - "32001:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=cursosDB
+      - MYSQL_DATABASE=asignaturasdb
     volumes:
-      - ./databases/cursosDB/:/docker-entrypoint-initdb.d
+     - ./db/asignaturasdb/:/docker-entrypoint-initdb.d
 
-  asignaturasDB:
-    image: mysql:5.6
+  cursosdb:
+    image: mysql:5.7
+    container_name: cursosdb
     ports:
       - "32002:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=asignaturasDB
+      - MYSQL_DATABASE=cursosdb
     volumes:
-      - ./databases/asignaturasDB/:/docker-entrypoint-initdb.d
+     - ./db/cursosdb/:/docker-entrypoint-initdb.d
 
   usuarios:
-    image: microusuarios
     build:
       context: ./microservicios/usuarios
+    container_name: usuarios
+    links:
+      - usuariosdb
     ports:
       - "3005:3005"
 
   asignaturas:
-    image: microasignaturas
     build:
       context: ./microservicios/asignaturas
+    container_name: asignaturas
+    links:
+      - asignaturasdb
     ports:
       - "3006:3006"
 
   cursos:
-    image: microcursos
     build:
       context: ./microservicios/cursos
+    container_name: cursos
+    links:
+      - cursosdb
+      - usuarios
+      - asignaturas
     ports:
       - "3007:3007"
 
   graficas:
-    image: micrograficas
     build:
       context: ./microservicios/graficas
+    container_name: graficas
+    links:
+      - usuarios
+      - cursos
     ports:
       - "3008:3008"
 
   haproxy:
-    image: haproxy:latest
+    build:
+      context: ./haproxy
+    container_name: haproxy
     volumes:
       - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    links:
+      - web1
+      - web2
     ports:
       - "80:80"
 
-  apache:
+  web1: 
     build:
       context: ./vista
+    container_name: web1
+    links:
+      - usuarios
+      - asignaturas
+      - cursos
+      - graficas
     ports:
       - "8080:80"
+
+  web2: 
+    build:
+      context: ./vista
+    container_name: web2
+    links:
+      - usuarios
+      - asignaturas
+      - cursos
+      - graficas
+    ports:
+      - "8081:80"

@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS asignaturasDB;
-USE asignaturasDB;
+CREATE DATABASE IF NOT EXISTS asignaturasdb;
+USE asignaturasdb;
 
 DROP TABLE IF EXISTS `asignaturas`;
 CREATE TABLE `asignaturas` (
