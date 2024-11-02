@@ -31,7 +31,7 @@ services:
       - MYSQL_DATABASE=cursosdb
     volumes:
      - ./db/cursosdb/:/docker-entrypoint-initdb.d
-
+     
   usuarios:
     build:
       context: ./microservicios/usuarios
@@ -94,7 +94,7 @@ services:
       - graficas
     ports:
       - "8080:80"
-
+      
   web2: 
     build:
       context: ./vista
