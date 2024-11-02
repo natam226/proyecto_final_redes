@@ -1,10 +1,10 @@
 # Usar la imagen base de Apache
-FROM httpd:2.4
-
-# Copiar los archivos de la vista al directorio de Apache
-COPY . /usr/local/apache2/htdocs/
-
-# Exponer el puerto 80
+FROM ubuntu
+RUN apt update
+RUN apt install -y apache2
+RUN apt install -y apache2-utils
+RUN apt clean
 EXPOSE 80
+CMD ["apache2ctl", "-D", "FOREGROUND"]
 
 
