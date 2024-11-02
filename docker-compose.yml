@@ -1,103 +1,108 @@
-version: '3.8'
-
 services:
-  databases:
-    image: mysql:5.6
+  usuariosdb:
+    image: mysql:5.7
+    container_name: usuariosdb
     ports:
-      - "3307:3306"
+      - "32000:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=usuariosdb
     volumes:
-      - ./databases/:/docker-entrypoint-initdb.d
-      - ./databases/mysql-data/import:/var/lib/mysql-files
-      - ../database_vol/mysql-asignaturas-data:/var/lib/mysql
-    networks:
-      - my-network
+     - ./db/usuariosdb/:/docker-entrypoint-initdb.d
 
+  asignaturasdb:
+    image: mysql:5.7
+    container_name: asignaturasdb
+    ports:
+      - "32001:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=asignaturasdb
+    volumes:
+     - ./db/asignaturasdb/:/docker-entrypoint-initdb.d
+
+  cursosdb:
+    image: mysql:5.7
+    container_name: cursosdb
+    ports:
+      - "32002:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=cursosdb
+    volumes:
+     - ./db/cursosdb/:/docker-entrypoint-initdb.d
+     
   usuarios:
     build:
       context: ./microservicios/usuarios
+    container_name: usuarios
+    links:
+      - usuariosdb
     ports:
       - "3005:3005"
-    depends_on:
-      - databases
-    networks:
-      - my-network
 
   asignaturas:
     build:
       context: ./microservicios/asignaturas
+    container_name: asignaturas
+    links:
+      - asignaturasdb
     ports:
       - "3006:3006"
-    depends_on:
-      - databases
-    networks:
-      - my-network
 
   cursos:
     build:
       context: ./microservicios/cursos
-    ports:
-      - "3007:3007"
-    depends_on:
-      - databases
+    container_name: cursos
+    links:
+      - cursosdb
       - usuarios
       - asignaturas
-    networks:
-      - my-network
+    ports:
+      - "3007:3007"
 
   graficas:
     build:
       context: ./microservicios/graficas
-    ports:
-      - "3008:3008"
-    depends_on:
+    container_name: graficas
+    links:
       - usuarios
       - cursos
-    networks:
-      - my-network
+    ports:
+      - "3008:3008"
 
   haproxy:
     build:
       context: ./haproxy
+    container_name: haproxy
     volumes:
       - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-    ports:
-      - "80:80"
-    depends_on:
+    links:
       - web1
       - web2
-    networks:
-      - my-network
+    ports:
+      - "80:80"
 
   web1: 
     build:
       context: ./vista
-    ports:
-      - "8080:80"
-    depends_on:
+    container_name: web1
+    links:
       - usuarios
       - asignaturas
       - cursos
       - graficas
-    networks:
-      - my-network
-
-
+    ports:
+      - "8080:80"
+      
   web2: 
     build:
       context: ./vista
-    ports:
-      - "8081:80"
-    depends_on:
+    container_name: web2
+    links:
       - usuarios
       - asignaturas
       - cursos
       - graficas
-    networks:
-      - my-network
-
-networks:
-  my-network:
-    driver: bridge
-
+    ports:
+      - "8081:80"
