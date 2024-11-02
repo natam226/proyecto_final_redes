@@ -114,7 +114,7 @@ services:
       - cursos
       - graficas
     volumes:
-      - ./vista/html:/var/www/html
+      - ./vista:/var/www/html
 
   web2: 
     build:
@@ -130,7 +130,7 @@ services:
       - cursos
       - graficas
     volumes:
-      - ./vista/html:/var/www/html
+      - ./vista:/var/www/html
 
 networks:
   mi_red:
