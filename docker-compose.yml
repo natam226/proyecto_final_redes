@@ -1,4 +1,3 @@
-version: '3'
 services:
   usuariosdb:
     image: mysql:5.7
@@ -114,7 +113,7 @@ services:
       - cursos
       - graficas
     volumes:
-      - ./vista:/var/www/html
+      - ./vista:/usr/local/apache2/htdocs
 
   web2: 
     build:
@@ -130,8 +129,8 @@ services:
       - cursos
       - graficas
     volumes:
-      - ./vista:/var/www/html
-
+      - ./vista:/usr/local/apache2/htdocs
+      
 networks:
   mi_red:
     driver: bridge
