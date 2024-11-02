@@ -1,11 +1,11 @@
 const mysql = require('mysql2/promise');
 
 const connection = mysql.createPool({
-    host: 'databases',
+    host: 'cursosdb',
     user: 'root',
     password: 'password',
     port: '3306',
-    database: 'cursosDB'
+    database: 'cursosdb'
 });
 
 // Obtener cursos por estudiante y periodo

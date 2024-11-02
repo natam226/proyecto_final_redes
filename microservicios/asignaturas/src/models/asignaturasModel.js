@@ -2,11 +2,11 @@ const mysql = require('mysql2/promise');
 
 // Crear la conexión a la base de datos
 const connection = mysql.createPool({
-    host: 'databases',
+    host: 'asignaturasdb',
     user: 'root',
     password: 'password',
     port: '3306',
-    database: 'asignaturasDB'
+    database: 'asignaturasdb'
 });
 
 // Obtener todas las asignaturas
