@@ -1,10 +1,7 @@
-# Usar la imagen base de Apache
-FROM ubuntu
-RUN apt update
-RUN apt install -y apache2
-RUN apt install -y apache2-utils
-RUN apt clean
+FROM httpd:alpine
+
+COPY . /usr/local/apache2/htdocs/
+
 EXPOSE 80
-CMD ["apache2ctl", "-D", "FOREGROUND"]
 
-
+CMD ["httpd-foreground"]

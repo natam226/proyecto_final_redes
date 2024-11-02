@@ -112,8 +112,6 @@ services:
       - asignaturas
       - cursos
       - graficas
-    volumes:
-      - ./vista:/usr/local/apache2/htdocs
 
   web2: 
     build:
@@ -128,9 +126,7 @@ services:
       - asignaturas
       - cursos
       - graficas
-    volumes:
-      - ./vista:/usr/local/apache2/htdocs
-      
+
 networks:
   mi_red:
     driver: bridge
