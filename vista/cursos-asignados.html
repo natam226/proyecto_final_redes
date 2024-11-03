@@ -107,12 +107,12 @@
             }
     
             // Obtener la información del profesor
-            $.get(`http://usuarios:3005/profesores/${usuarioProfesor}`)
+            $.get(`http://192.168.100.2:3005/profesores/${usuarioProfesor}`)
                 .done(function(profesor) {
                     const correoProfesor = profesor.correo;
     
                     // Obtener los cursos del profesor
-                    $.get(`http://cursos:3007/cursos/profesor/${correoProfesor}`)
+                    $.get(`http://192.168.100.2:3007/cursos/profesor/${correoProfesor}`)
                         .done(function(data) {
                             const cursos = data;
                             const coursesMap = new Map();
@@ -209,7 +209,7 @@
                                 });
     
                                 $.ajax({
-                                    url: `http://cursos:3007/cursos/actualizarNota`,
+                                    url: `http://192.168.100.2:3007/cursos/actualizarNota`,
                                     method: 'PUT',
                                     contentType: 'application/json',
                                     data: JSON.stringify({

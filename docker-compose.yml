@@ -8,7 +8,9 @@ services:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=usuariosdb
     volumes:
-     - ./db/usuariosdb/:/docker-entrypoint-initdb.d
+      - ./db/usuariosdb/:/docker-entrypoint-initdb.d
+    networks:
+      - mi_red
 
   asignaturasdb:
     image: mysql:5.7
@@ -19,7 +21,9 @@ services:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=asignaturasdb
     volumes:
-     - ./db/asignaturasdb/:/docker-entrypoint-initdb.d
+      - ./db/asignaturasdb/:/docker-entrypoint-initdb.d
+    networks:
+      - mi_red
 
   cursosdb:
     image: mysql:5.7
@@ -30,46 +34,56 @@ services:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=cursosdb
     volumes:
-     - ./db/cursosdb/:/docker-entrypoint-initdb.d
-     
+      - ./db/cursosdb/:/docker-entrypoint-initdb.d
+    networks:
+      - mi_red
+
   usuarios:
     build:
       context: ./microservicios/usuarios
     container_name: usuarios
-    links:
-      - usuariosdb
     ports:
       - "3005:3005"
+    networks:
+      - mi_red
+    depends_on:
+      - usuariosdb
 
   asignaturas:
     build:
       context: ./microservicios/asignaturas
     container_name: asignaturas
-    links:
-      - asignaturasdb
     ports:
       - "3006:3006"
+    networks:
+      - mi_red
+    depends_on:
+      - asignaturasdb
 
   cursos:
     build:
       context: ./microservicios/cursos
     container_name: cursos
-    links:
+    ports:
+      - "3007:3007"
+    networks:
+      - mi_red
+    depends_on:
       - cursosdb
       - usuarios
       - asignaturas
-    ports:
-      - "3007:3007"
 
   graficas:
     build:
       context: ./microservicios/graficas
     container_name: graficas
-    links:
-      - usuarios
-      - cursos
     ports:
       - "3008:3008"
+    networks:
+      - mi_red
+    depends_on:
+      - usuarios
+      - cursos
 
   haproxy:
     build:
@@ -77,32 +91,42 @@ services:
     container_name: haproxy
     volumes:
       - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-    links:
-      - web1
-      - web2
     ports:
       - "80:80"
+    networks:
+      - mi_red
+    depends_on:
+      - web1
+      - web2
 
   web1: 
     build:
       context: ./vista
     container_name: web1
-    links:
+    ports:
+      - "8080:80"
+    networks:
+      - mi_red
+    depends_on:
       - usuarios
       - asignaturas
       - cursos
       - graficas
-    ports:
-      - "8080:80"
-      
+
   web2: 
     build:
       context: ./vista
     container_name: web2
-    links:
+    ports:
+      - "8081:80"
+    networks:
+      - mi_red
+    depends_on:
       - usuarios
       - asignaturas
       - cursos
       - graficas
-    ports:
-      - "8081:80"
+
+networks:
+  mi_red:
+    driver: bridge

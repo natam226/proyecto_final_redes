@@ -9,7 +9,7 @@ router.get('/cursos/estudiante/:nombreEstudiante/pasados', async (req, res) => {
 
     try {
         // Verificar si el estudiante existe
-        const responseEstudiante = await axios.get(`http://localhost:3005/estudiantes/${nombreEstudiante}`);
+        const responseEstudiante = await axios.get(`http://192.168.100.2:3005/estudiantes/${nombreEstudiante}`);
         if (responseEstudiante.status !== 200) {
             return res.status(404).json({ error: 'Estudiante no encontrado' });
         }
@@ -33,7 +33,7 @@ router.get('/cursos/estudiante/:nombreEstudiante/actual', async (req, res) => {
     const { nombreEstudiante } = req.params;
 
     try {
-        const responseEstudiante = await axios.get(`http://localhost:3005/estudiantes/${nombreEstudiante}`);
+        const responseEstudiante = await axios.get(`http://192.168.100.2:3005/estudiantes/${nombreEstudiante}`);
         if (responseEstudiante.status !== 200) {
             return res.status(404).json({ error: 'Estudiante no encontrado' });
         }
@@ -142,14 +142,14 @@ router.post('/cursos/matricular', async (req, res) => {
 
     try {
         // Obtener datos de la asignatura
-        const responseAsignatura = await axios.get(`http://localhost:3006/asignaturas/nombre/${nombreAsignatura}`);
+        const responseAsignatura = await axios.get(`http://192.168.100.2:3006/asignaturas/nombre/${nombreAsignatura}`);
         if (responseAsignatura.status !== 200) {
             throw new Error('Error al obtener la asignatura');
         }
         const { nombreAsignatura: nombre, cupos, creditos } = responseAsignatura.data;
 
         // Obtener datos del estudiante
-        const responseEstudiante = await axios.get(`http://localhost:3005/estudiantes/${usuarioEstudiante}`);
+        const responseEstudiante = await axios.get(`http://192.168.100.2:3005/estudiantes/${usuarioEstudiante}`);
         if (responseEstudiante.status !== 200) {
             throw new Error('Error al obtener los datos del estudiante');
         }
@@ -182,7 +182,7 @@ router.post('/cursos/matricular', async (req, res) => {
             console.log('No se encontró curso existente. Obteniendo un profesor aleatorio...');
 
             // Obtener todos los profesores disponibles (Ajusta la URL según tu API de profesores)
-            const responseProfesores = await axios.get('http://localhost:3005/profesores');
+            const responseProfesores = await axios.get('http://192.168.100.2:3005/profesores');
             if (responseProfesores.status !== 200) {
                 throw new Error('Error al obtener la lista de profesores');
             }
@@ -225,10 +225,10 @@ router.post('/cursos/matricular', async (req, res) => {
         await cursosModel.crearCurso(nuevoCurso);
 
         // Actualizar cupos de la asignatura
-        await axios.put(`http://localhost:3006/asignaturas/${responseAsignatura.data.id}/cupos`, { cupos: cupos - 1 });
+        await axios.put(`http://192.168.100.2:3006/asignaturas/${responseAsignatura.data.id}/cupos`, { cupos: cupos - 1 });
 
         // Actualizar créditos del estudiante
-        await axios.put(`http://localhost:3005/estudiantes/${usuarioEstudiante}/creditos`, { totalCreditos: totalCreditos + creditos });
+        await axios.put(`http://192.168.100.2:3005/estudiantes/${usuarioEstudiante}/creditos`, { totalCreditos: totalCreditos + creditos });
 
         res.status(201).json({ message: 'Estudiante matriculado exitosamente' });
     } catch (error) {

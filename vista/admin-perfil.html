@@ -175,7 +175,7 @@
             }
 
             // Obtener la información del administrador al cargar la página
-            $.get(`http://usuarios:3005/profesores/${usuario}`)
+            $.get(`http://192.168.100.2:3005/profesores/${usuario}`)
                 .done(function(data) {
                     $('#usuario').val(data.usuario);
                     $('#contrasena').val(data.contrasena);
@@ -200,7 +200,7 @@
                 $('#editarBtn').removeClass('d-none');
                 $('#guardarBtn, #cancelarBtn').addClass('d-none');
                 // Recargar la información del administrador para restaurar valores originales
-                $.get(`http://usuarios:3005/profesores/${usuario}`)
+                $.get(`http://192.168.100.2:3005/profesores/${usuario}`)
                     .done(function(data) {
                         $('#usuario').val(data.usuario);
                         $('#contrasena').val(data.contrasena);
@@ -221,7 +221,7 @@
                 };
 
                 $.ajax({
-                    url: `http://usuarios:3005/profesores/${usuario}`,
+                    url: `http://192.168.100.2:3005/profesores/${usuario}`,
                     type: 'PUT',
                     contentType: 'application/json',
                     data: JSON.stringify(adminData),

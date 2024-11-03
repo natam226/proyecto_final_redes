@@ -240,7 +240,7 @@
             $('#formAsignatura').submit(function(event) {
                 event.preventDefault();
                 const id = $('#asignaturaId').val();
-                const url = id ? `http://asignaturas:3006/asignaturas/${id}` : 'http://asignaturas:3006/asignaturas';
+                const url = id ? `http://192.168.100.2:3006/asignaturas/${id}` : 'http://192.168.100.2:3006/asignaturas';
                 const method = id ? 'PUT' : 'POST';
                 $.ajax({
                     url: url,
@@ -265,7 +265,7 @@
             // Cargar asignaturas desde la API
             function cargarAsignaturas() {
     $.ajax({
-        url: 'http://asignaturas:3006/asignaturas',
+        url: 'http://192.168.100.2:3006/asignaturas',
         method: 'GET',
         success: function(data) {
             const tableBody = $('#asignaturasTable');
@@ -297,7 +297,7 @@
             $('#asignaturasTable').on('click', '.editarBtn', function() {
                 const id = $(this).data('id');
                 $.ajax({
-                    url: `http://asignaturas:3006/asignaturas/${id}`,
+                    url: `http://192.168.100.2:3006/asignaturas/${id}`,
                     method: 'GET',
                     success: function(asignatura) {
                         $('#formTitle').text('Editar Asignatura');
@@ -319,7 +319,7 @@
                 const id = $(this).data('id');
                 if (confirm('¿Está seguro de que desea eliminar esta asignatura?')) {
                     $.ajax({
-                        url: `http://asignaturas:3006/asignaturas/${id}`,
+                        url: `http://192.168.100.2:3006/asignaturas/${id}`,
                         method: 'DELETE',
                         success: function() {
                             cargarAsignaturas();

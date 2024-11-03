@@ -106,7 +106,7 @@
             const usuarioProfesor = localStorage.getItem('usuario'); // Cambia por el usuario real si es necesario
             
             // Obtener la información del profesor al cargar la página
-            $.get(`http://usuarios:3005/profesores/${usuarioProfesor}`)
+            $.get(`http://192.168.100.2:3005/profesores/${usuarioProfesor}`)
                 .done(function(data) {
                     $('#usuario').val(data.usuario);
                     $('#contrasena').val(data.contrasena);
