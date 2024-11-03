@@ -107,6 +107,12 @@
                             window.location.href = 'cursos-asignados.html'; // Redirige a la página de perfil del profesor
                         } else if (rol === 'Director') {
                             window.location.href = 'admin-perfil.html'; // Redirige a la página de Director
+                        } else {
+                            // Si el rol no es válido, muestra un mensaje de error
+                            alert('Error: Rol no válido. Por favor, asegúrese de que su rol sea Profesor o Director.');
+                            // Opcional: limpiar el localStorage
+                            localStorage.removeItem('usuario');
+                            localStorage.removeItem('rol');
                         }
                     })
                     .fail(function() {
