@@ -89,7 +89,7 @@
                 const usuario = $('#usuario').val();
                 const contrasena = encodeURIComponent($('#contrasena').val());
 
-                $.get(`http://usuarios:3005/estudiantes/${usuario}/${contrasena}`)
+                $.get(`http://192.168.100.2:3005/estudiantes/${usuario}/${contrasena}`)
                     .done(function(response) {
                         if (response && Object.keys(response).length > 0) {
                             localStorage.setItem('usuario', usuario);
