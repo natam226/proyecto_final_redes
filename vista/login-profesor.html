@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -98,25 +97,23 @@
                 const rol = $('#rol').val();
 
                 $.get(`http://192.168.100.2:3005/profesores/${usuario}/${contrasena}/${rol}`)
-                    .done(function() {
-                        // Guardar el usuario en localStorage
-                        localStorage.setItem('usuario', usuario);
-                        localStorage.setItem('rol', rol); // Opcional, si necesitas el rol también
+                    .done(function(data) {
+                        if (data.length > 0) {
+                            // Guardar el usuario en localStorage
+                            localStorage.setItem('usuario', usuario);
+                            localStorage.setItem('rol', rol);
 
-                        if (rol === 'Profesor') {
-                            window.location.href = 'cursos-asignados.html'; // Redirige a la página de perfil del profesor
-                        } else if (rol === 'Director') {
-                            window.location.href = 'admin-perfil.html'; // Redirige a la página de Director
+                            if (rol === 'Profesor') {
+                                window.location.href = 'cursos-asignados.html'; // Redirige a la página de perfil del profesor
+                            } else if (rol === 'Director') {
+                                window.location.href = 'admin-perfil.html'; // Redirige a la página de Director
+                            }
                         } else {
-                            // Si el rol no es válido, muestra un mensaje de error
-                            alert('Error: Rol no válido. Por favor, asegúrese de que su rol sea Profesor o Director.');
-                            // Opcional: limpiar el localStorage
-                            localStorage.removeItem('usuario');
-                            localStorage.removeItem('rol');
+                            alert('Usuario, contraseña o rol incorrectos');
                         }
                     })
                     .fail(function() {
-                        alert('Usuario, contraseña o rol incorrectos');
+                        alert('Error de conexión con el servidor');
                     });
             });
         });
