@@ -97,7 +97,7 @@
                 const contrasena = encodeURIComponent($('#contrasena').val());
                 const rol = $('#rol').val();
 
-                $.get(`http://usuarios:3005/profesores/${usuario}/${contrasena}/${rol}`)
+                $.get(`http://192.168.100.2:3005/profesores/${usuario}/${contrasena}/${rol}`)
                     .done(function() {
                         // Guardar el usuario en localStorage
                         localStorage.setItem('usuario', usuario);

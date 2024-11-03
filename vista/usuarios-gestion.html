@@ -123,7 +123,7 @@
     <script>
         $(document).ready(function() {
             // Obtener todos los profesores al cargar la página
-            $.get('http://usuarios:3005/profesores/')
+            $.get('http://192.168.100.2:3005/profesores/')
                 .done(function(profesores) {
                     let tableContent = '';
                     profesores.forEach(profesor => {
@@ -151,7 +151,7 @@
                 const usuario = $(this).data('usuario');
                 if (confirm('¿Estás seguro de que deseas eliminar a este profesor?')) {
                     $.ajax({
-                        url: `http://usuarios:3005/profesores/${usuario}`,
+                        url: `http://192.168.100.2:3005/profesores/${usuario}`,
                         type: 'DELETE',
                         success: function() {
                             alert('Profesor eliminado exitosamente');

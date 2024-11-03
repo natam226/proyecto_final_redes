@@ -187,7 +187,7 @@
             }
 
             // Cargar los datos del estudiante
-            fetch(`http://usuarios:3005/estudiantes/${usuario}`)
+            fetch(`http://192.168.100.2:3005/estudiantes/${usuario}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Error en la solicitud');
@@ -233,7 +233,7 @@
                     desplazado: document.getElementById('desplazado').value,
                 };
 
-                fetch(`http://usuarios:3005/estudiantes/${usuario}`, {
+                fetch(`http://192.168.100.2:3005/estudiantes/${usuario}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'

@@ -92,7 +92,7 @@
         $(document).ready(function() {
             const usuario = localStorage.getItem('usuario'); // Cambia esto por el usuario del profesor o recupera del localStorage si corresponde
 
-            $.get(`http://graficas:3008/profesor/${usuario}/grafico-aprobados-reprobados`)
+            $.get(`http://192.168.100.2:3008/profesor/${usuario}/grafico-aprobados-reprobados`)
                 .done(function(response) {
                     if (response.grafico) {
                         $('#grafico').html(`<img src="${response.grafico}" alt="Gráfico de rendimiento">`);

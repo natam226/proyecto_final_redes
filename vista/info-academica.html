@@ -121,7 +121,7 @@
                 // Función para cargar información del estudiante
                 function obtenerInformacionEstudiante(usuarioEstudiante) {
                     console.log("Obteniendo información del estudiante:", usuarioEstudiante);
-                    return $.get(`http://usuarios:3005/estudiantes/${usuarioEstudiante}`)
+                    return $.get(`http://192.168.100.2:3005/estudiantes/${usuarioEstudiante}`)
                         .then(data => data.nombre)
                         .catch((error) => {
                             console.error('Error al obtener la información del estudiante:', error);
@@ -139,7 +139,7 @@
 
                     console.log("Cargando cursos pasados para:", nombreEstudiante);
 
-                    $.get(`http://cursos:3007/cursos/estudiante/${nombreEstudiante}/pasados`, function(data) {
+                    $.get(`http://192.168.100.2:3007/cursos/estudiante/${nombreEstudiante}/pasados`, function(data) {
                         console.log('Datos recibidos:', data);
                         let tableBody = $('#cursosBody');
                         tableBody.empty(); // Limpiar el cuerpo de la tabla antes de agregar nuevas filas

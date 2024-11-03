@@ -123,7 +123,7 @@
     <script>
         $(document).ready(function() {
             // Obtener todos los cursos al cargar la página
-            $.get('http://cursos:3007/cursos/')
+            $.get('http://192.168.100.2:3007/cursos/')
                 .done(function(cursos) {
                     // Agrupar cursos por nombre, grupo, profesor y periodo
                     const groupedCourses = {};

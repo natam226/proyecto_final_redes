@@ -131,7 +131,7 @@
                 }
 
                 // Obtener información del estudiante
-                fetch(`http://usuarios:3005/estudiantes/${usuario}`)
+                fetch(`http://192.168.100.2:3005/estudiantes/${usuario}`)
                     .then(response => {
                         if (!response.ok) {
                             throw new Error('No se pudo obtener la información del estudiante');
@@ -156,7 +156,7 @@
                     }
 
                     // Solicitar los cursos desde el endpoint
-                    $.get(`http://cursos:3007/cursos/estudiante/${nombreEstudiante}/actual`)
+                    $.get(`http://192.168.100.2:3007/cursos/estudiante/${nombreEstudiante}/actual`)
                         .done(function(data) {
                             console.log('Datos recibidos:', data); // Verifica la respuesta
                             let tableBody = $('#cursosBody');
