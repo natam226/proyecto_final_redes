@@ -1,7 +1,7 @@
 import requests
     
 def obtener_rendimiento_estudiantes(correoProf):
-    url = f'http://localhost:3007/cursos/rendimiento/{correoProf}'
+    url = f'http://192.168.100.2:3007/cursos/rendimiento/{correoProf}'
     response = requests.get(url)
     if response.status_code == 200:
         return response.json()
@@ -9,7 +9,7 @@ def obtener_rendimiento_estudiantes(correoProf):
         return None
     
 def obtener_notas_estudiante(correoEstudiante):
-    url = f'http://localhost:3007/cursos/notas/{correoEstudiante}'
+    url = f'http://192.168.100.2:3007/cursos/notas/{correoEstudiante}'
     response = requests.get(url)
     if response.status_code == 200:
         return response.json()
@@ -17,7 +17,7 @@ def obtener_notas_estudiante(correoEstudiante):
         return None
 
 def obtener_notas_estudiantes(): 
-    url = f'http://localhost:3007/cursos'
+    url = f'http://192.168.100.2:3007/cursos'
     response = requests.get(url)
     if response.status_code == 200:
         return response.json()
