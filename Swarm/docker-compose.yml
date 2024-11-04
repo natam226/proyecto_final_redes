@@ -1,0 +1,129 @@
+services:
+  usuariosdb:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: usuariosdb
+    deploy:
+      replicas: 1
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.2
+    networks:
+      - mi_red
+
+  asignaturasdb:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: asignaturasdb
+    deploy:
+      replicas: 1
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.3
+    networks:
+      - mi_red
+
+  cursosdb:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: cursosdb
+    deploy:
+      replicas: 1
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.2
+    networks:
+      - mi_red
+
+  usuarios:
+    build: ./microservicios/usuarios
+    deploy:
+      replicas: 2
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.2
+    networks:
+      - mi_red
+    depends_on:
+      - usuariosdb
+
+  asignaturas:
+    build: ./microservicios/asignaturas
+    deploy:
+      replicas: 2
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.3
+    networks:
+      - mi_red
+    depends_on:
+      - asignaturasdb
+
+  cursos:
+    build: ./microservicios/cursos
+    deploy:
+      replicas: 2
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.2
+    networks:
+      - mi_red
+    depends_on:
+      - cursosdb
+
+  graficas:
+    build: ./microservicios/graficas
+    deploy:
+      replicas: 2
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.3
+    networks:
+      - mi_red
+    depends_on:
+      - usuarios
+      - cursos
+
+  web:
+    build: ./vista
+    deploy:
+      replicas: 2
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.3
+    ports:
+      - "8080:80"
+    networks:
+      - mi_red
+    depends_on:
+      - usuarios
+      - asignaturas
+      - cursos
+      - graficas
+
+  haproxy:
+    image: haproxy:latest
+    volumes:
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    ports:
+      - "80:80"   # Puerta de entrada al balanceador de carga
+    deploy:
+      replicas: 1
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.2
+    depends_on:
+      - web
+      - usuarios
+      - asignaturas
+      - cursos
+      - graficas
+    networks:
+      - mi_red
+
+networks:
+  mi_red:
+    driver: overlay
