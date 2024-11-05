@@ -13,26 +13,28 @@ El proyecto consiste en una plataforma para la gestión centralizada de programa
 *[Valeria Franco Cordoba](https://github.com/Hola12334)*
 
 ## Tabla de Contenidos
-1. Requisitos
-2. Instalación
-3. Estructura
-4. Uso
+1. [Requisitos](https://github.com/natam226/proyecto_final_redes/edit/main/README.md#Requisitos)
+2. [Estructura](https://github.com/natam226/proyecto_final_redes/edit/main/README.md#Estructura)
+3. [Instalación](https://github.com/natam226/proyecto_final_redes/edit/main/README.md#instalación)
+4. [Uso](https://github.com/natam226/proyecto_final_redes/edit/main/README.md#Uso)
 
 ## Requisitos
-La arquitectura está diseñada para ser desplegada en dos servidores Linux. Para que el proyecto funcione es necesario instalar las siguientes dependencias estos servidores: 
-- Docker
+La arquitectura está diseñada para ser desplegada en dos servidores Linux. Para que el proyecto funcione es necesario instalar las siguientes dependencias en estos servidores (despliegue cada dependencia para obtener la guía para instalarla): 
+
+<details>
+<summary>Docker</summary>
 
   Actualice su lista de paquetes existente
-    ```bash
-        sudo apt update
-        sudo apt install apt-transport-https ca-certificates curl software-properties-common
-        
-    ```
-    instale algunos paquetes de requisitos previos que permitan a apt usar paquetes a través de HTTPS:
-    ```bash
+  ```bash
+            sudo apt update
+            sudo apt install apt-transport-https ca-certificates curl software-properties-common
+            
+  ```
+  instale algunos paquetes de requisitos previos que permitan a apt usar paquetes a través de HTTPS:
+  ```bash
         curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-        
-    ```
+          
+  ```
   Agregue el repositorio Docker a las fuentes APT:
   ```bash
         sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
@@ -47,22 +49,60 @@ La arquitectura está diseñada para ser desplegada en dos servidores Linux. Par
   sudo apt install docker-ce
   sudo systemctl status docker      
    ```
-- Docker Compose
 
-  Instale Docker compose y establezca permisos para usar el comando
-    ```bash
-    sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    sudo chmod +x /usr/local/bin/docker-compose
+</details>
+
+<details>
+<summary>Docker Compose</summary>
+
+Instale Docker compose y establezca permisos para usar el comando docker-compose
+  ```bash
+      sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+      sudo chmod +x /usr/local/bin/docker-compose
    ```
-- Git
 
-  Instale git
-    ```bash
+</details>
+
+<details>
+<summary>Git</summary>
+
+Instale git
+  ```bash
   sudo apt update
   sudo apt install git
 
    ```
-  ## Instalación
+
+</details>
+
+## Estructura
+El repositorio está estructurado de la siguiente manera: 
+  ```bash
+  proyecto_final_redes
+├── docker_compose
+└── Swarm
+    ├── db
+    │   ├── asignaturasdb
+    │   ├── cursosdb
+    │   └── usuariosdb
+    ├── haproxy
+    ├── microservicios
+    │   ├── asignaturas
+    │   │   ├── node_modules
+    │   │   └── src
+    │   ├── cursos
+    │   │   ├── node_modules
+    │   │   └── src
+    │   ├── graficas
+    │   │   ├── node_modules
+    │   │   └── src
+    │   └── usuarios
+    │       ├── node_modules
+    │       └── src
+    └── vista
+
+   ```
+## Instalación
   Siga estos pasos para instalar el proyecto
   1. Clone este repositorio
       ```bash
@@ -72,23 +112,4 @@ La arquitectura está diseñada para ser desplegada en dos servidores Linux. Par
       ```bash
       cd proyecto_final_redes
        ```
-  3. Instale las dependencias necesarias para cada microservicio en /microservicios:
-     - /usuarios y /asignaturas
-       ```bash
-        npm install express morgan mysql mysql2
-       ```
-     - /cursos
-        ```bash
-          npm install axios express morgan mysql mysql2
-         ```
-     - /graficas
-        ```bash
-        python3 -m pip install flask requests pandas plotly Flask_cors --no-warn-script-location
-        
-        ```    
 
-
-
-    ```bash
-
-     ```
