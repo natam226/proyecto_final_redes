@@ -40,8 +40,7 @@ La arquitectura está diseñada para ser desplegada en dos servidores Linux. Par
    ```
   Actualice de nuevo el paquete de base de datos
   ```bash
-  sudo apt update 
-        
+  sudo apt update    
    ```
   Instale Docker
   ```bash
@@ -55,27 +54,6 @@ La arquitectura está diseñada para ser desplegada en dos servidores Linux. Par
     sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     sudo chmod +x /usr/local/bin/docker-compose
    ```
-- HAProxy
-    Instale HAProxy
-  ```bash
-    apt-get install haproxy
-   ```
-- Node.js
-
-  Actualice su lista de paquetes existente
-    ```bash
-        sudo apt update
-        sudo apt install apt-transport-https ca-certificates curl software-properties-common
-        
-    ```
-    Instale nodejs
-  ```bash
-  sudo apt install nodejs    
-   ```
-  Adicionalmente instale su administrador de paquetes
-  ```bash
-  sudo apt install npm
-   ```
 - Git
 
   Instale git
@@ -84,14 +62,6 @@ La arquitectura está diseñada para ser desplegada en dos servidores Linux. Par
   sudo apt install git
 
    ```
-- Python
-
-  Instale Python y su administrador de paquetes
-    ```bash
-    sudo apt update
-    sudo apt install python3
-    sudo apt install python3-pip
-     ```
   ## Instalación
   Siga estos pasos para instalar el proyecto
   1. Clone este repositorio
