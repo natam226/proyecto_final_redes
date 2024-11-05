@@ -13,10 +13,10 @@ El proyecto consiste en una plataforma para la gestión centralizada de programa
 *[Valeria Franco Cordoba](https://github.com/Hola12334)*
 
 ## Tabla de Contenidos
-1. [Requisitos](https://github.com/natam226/proyecto_final_redes/edit/main/README.md#Requisitos)
-2. [Estructura](https://github.com/natam226/proyecto_final_redes/edit/main/README.md#Estructura)
-3. [Instalación](https://github.com/natam226/proyecto_final_redes/edit/main/README.md#instalación)
-4. [Uso](https://github.com/natam226/proyecto_final_redes/edit/main/README.md#Uso)
+1. [Requisitos](https://github.com/natam226/proyecto_final_redes?tab=readme-ov-file#requisitos)
+2. [Estructura](https://github.com/natam226/proyecto_final_redes?tab=readme-ov-file#estructura)
+3. [Instalación](https://github.com/natam226/proyecto_final_redes?tab=readme-ov-file#instalación)
+4. [Uso](https://github.com/natam226/proyecto_final_redes?tab=readme-ov-file#uso)
 
 ## Requisitos
 La arquitectura está diseñada para ser desplegada en dos servidores Linux. Para que el proyecto funcione es necesario instalar las siguientes dependencias en estos servidores (despliegue cada dependencia para obtener la guía para instalarla): 
@@ -112,4 +112,4 @@ El repositorio está estructurado de la siguiente manera:
       ```bash
       cd proyecto_final_redes
        ```
-
+## Uso
