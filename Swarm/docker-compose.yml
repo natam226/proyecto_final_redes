@@ -39,7 +39,7 @@ services:
       - mi_red
 
   usuarios:
-    build: ./microservicios/usuarios
+    image: v4lentin4bc/microusuarios
     deploy:
       replicas: 2
       placement:
@@ -51,7 +51,7 @@ services:
       - usuariosdb
 
   asignaturas:
-    build: ./microservicios/asignaturas
+    image: v4lentin4bc/microasignaturas
     deploy:
       replicas: 2
       placement:
@@ -63,7 +63,7 @@ services:
       - asignaturasdb
 
   cursos:
-    build: ./microservicios/cursos
+    image: v4lentin4bc/microcursos
     deploy:
       replicas: 2
       placement:
@@ -75,7 +75,7 @@ services:
       - cursosdb
 
   graficas:
-    build: ./microservicios/graficas
+    image: v4lentin4bc/micrograficas
     deploy:
       replicas: 2
       placement:
@@ -88,7 +88,7 @@ services:
       - cursos
 
   web:
-    build: ./vista
+    image: v4lentin4bc/microweb
     deploy:
       replicas: 2
       placement:
