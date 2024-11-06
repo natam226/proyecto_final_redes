@@ -93,9 +93,6 @@ El repositorio está estructurado de la siguiente manera:
     │   ├── cursos
     │   │   ├── node_modules
     │   │   └── src
-    │   ├── graficas
-    │   │   ├── node_modules
-    │   │   └── src
     │   └── usuarios
     │       ├── node_modules
     │       └── src
@@ -112,4 +109,79 @@ El repositorio está estructurado de la siguiente manera:
       ```bash
       cd proyecto_final_redes
        ```
+  3. Ingrese los nodos al Swarm
+     ```bash
+      docker swarm init --advertise-addr 192.168.100.2
+       ```
+     Para el segundo nodo utilice el comando que le suministra el anterior con la siguiente estructura:
+     ```bash
+      docker swarm join --token <TOKEN> <IP_MANAGER>:2377
+       ```
+  4. Verifique los nodos
+     ```bash
+      docker node ls
+       ```
+  6. En la carpeta ./Swarm despliegue el docker-compose:
+     ```bash
+     docker stack deploy --compose-file docker-compose.yml academic_stack
+      ```
+  8. Verifique el funcionamiento de los servicios
+     ```bash
+     docker stack services academic_stack
+      ```
+
 ## Uso
+  > **Nota**: Si desea ver las estadísticas de HAProxy, ingrese al siguiente enlace: [http://192.168.100.2/haproxy?stats](http://192.168.100.2/haproxy?stats)
+  
+  Ingrese al siguiente enlace [http://192.168.100.2](http://192.168.100.2) para acceder a la página de la aplicación.
+  
+  - Para ingresar como estudiante, utilice las siguientes credenciales de prueba:
+    
+     Usuario: aabrashkovu
+    
+    Contraseña: lI49GSLJ
+          
+  - Para ingresar como profesor utilice las siguientes credenciales de prueba:
+      
+    Usuario: aalvy4w
+    
+    Contraseña: iI157KRhMjBvN
+          
+- Para ingresar como el Director, utilice las siguientes credenciales de prueba:
+      
+   Usuario: director
+  
+  Contraseña: 1234
+
+De acuerdo al usuario que escoja, se le presentará información diferente, en caso de entrar como estudiante usted podrá: 
+
+- Crear su usuario.
+- Iniciar sesión.
+- Ver las asignaturas.
+- Inscribirse a un curso.
+- Ver los cursos matriculados.
+- Ver los cursos matriculados en periodos académicos anteriores.
+- Ver su información de usuario.
+- Actualizar su información personal.
+
+En caso de entrar como profesor, usted podrá: 
+
+- Crear su usuario.
+- Iniciar sesión.
+- Ver cursos a los que esta asignado y los estudiantes que están inscritos en estos.
+- Ingresar notas en cursos.
+- Ver su información de usuario.
+- Actualizar su información personal.
+
+En caso de entrar como administrador (director), usted podrá: 
+
+- Iniciar sesión.
+- Ver y eliminar los estudiantes y profesores existentes.
+- Crear asignaturas.
+- Ver todas las asignaturas existentes.
+- Ver asignaturas por ID.
+- Modificar los cupos de las asignaturas.
+- Ver todos los cursos existentes.
+- Ver su información de usuario.
+- Actualizar su información personal.
+- Ver gráficas de la información relacionada con los estudiantes. 
