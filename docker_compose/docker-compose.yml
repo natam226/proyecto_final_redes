@@ -73,18 +73,6 @@ services:
       - usuarios
       - asignaturas
 
-  graficas:
-    build:
-      context: ./microservicios/graficas
-    container_name: graficas
-    ports:
-      - "3008:3008"
-    networks:
-      - mi_red
-    depends_on:
-      - usuarios
-      - cursos
-
   haproxy:
     build:
       context: ./haproxy
@@ -111,7 +99,6 @@ services:
       - usuarios
       - asignaturas
       - cursos
-      - graficas
 
   web2: 
     build:
@@ -125,7 +112,6 @@ services:
       - usuarios
       - asignaturas
       - cursos
-      - graficas
 
 networks:
   mi_red:
