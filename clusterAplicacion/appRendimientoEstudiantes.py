@@ -1,21 +1,11 @@
 from pyspark.sql import SparkSession
 
 # Inicia la sesión de Spark
-spark = SparkSession.builder.appName("Dashboard Información Estudiantes") \
-    .config("spark.jars", "/usr/share/java/mysql-connector-java-8.0.30.jar") \
-    .getOrCreate()
-
-# URLs de conexión JDBC para MySQL
-jdbc_url_usuarios = "jdbc:mysql://usuariosdb:3306/usuariosdb"
-jdbc_url_cursos = "jdbc:mysql://cursosdb:3306/cursosdb"
-connection_properties = {
-    "password": "password",
-    "driver": "com.mysql.cj.jdbc.Driver"
-}
+spark = SparkSession.builder.appName("Dashboard Información Estudiantes").getOrCreate()
 
 # Leer las tablas de MySQL
-df_estudiantes = spark.read.jdbc(url=jdbc_url_usuarios, table="estudiantes", properties=connection_properties)
-df_cursos = spark.read.jdbc(url=jdbc_url_cursos, table="cursos", properties=connection_properties)
+df_estudiantes = spark.read.csv("/root/proyecto_final_redes/clusterAplicacion/data_estudiantes.csv", header=True, inferSchema=True)
+df_cursos = spark.read.csv("/root/proyecto_final_redes/clusterAplicacion/data_cursos.csv", header=True, inferSchema=True)
 
 # Crear vistas temporales
 df_estudiantes.createOrReplaceTempView("estudiantes")
