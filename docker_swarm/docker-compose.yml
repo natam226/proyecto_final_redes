@@ -1,12 +1,14 @@
 services:
   usuariosdb:
     image: mysql:5.7
-    container_name: usuariosdb
-    ports:
-      - "32000:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=usuariosdb
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: usuariosdb
+    deploy:
+      replicas: 1
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.2
     volumes:
       - ./db/usuariosdb/:/docker-entrypoint-initdb.d
     networks:
@@ -14,12 +16,14 @@ services:
 
   asignaturasdb:
     image: mysql:5.7
-    container_name: asignaturasdb
-    ports:
-      - "32001:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=asignaturasdb
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: asignaturasdb
+    deploy:
+      replicas: 1
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.2
     volumes:
       - ./db/asignaturasdb/:/docker-entrypoint-initdb.d
     networks:
@@ -27,92 +31,93 @@ services:
 
   cursosdb:
     image: mysql:5.7
-    container_name: cursosdb
-    ports:
-      - "32002:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=cursosdb
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: cursosdb
+    deploy:
+      replicas: 1
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.2
     volumes:
       - ./db/cursosdb/:/docker-entrypoint-initdb.d
     networks:
       - mi_red
 
   usuarios:
-    build:
-      context: ./microservicios/usuarios
-    container_name: usuarios
+    image: v4lentin4bc/microusuarios
     ports:
       - "3005:3005"
+    deploy:
+      replicas: 2
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.2
     networks:
       - mi_red
     depends_on:
       - usuariosdb
 
   asignaturas:
-    build:
-      context: ./microservicios/asignaturas
-    container_name: asignaturas
+    image: v4lentin4bc/microasignaturas
     ports:
       - "3006:3006"
+    deploy:
+      replicas: 2
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.3
     networks:
       - mi_red
     depends_on:
       - asignaturasdb
 
   cursos:
-    build:
-      context: ./microservicios/cursos
-    container_name: cursos
+    image: v4lentin4bc/microcursos
     ports:
       - "3007:3007"
+    deploy:
+      replicas: 2
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.2
     networks:
       - mi_red
     depends_on:
       - cursosdb
+
+  web:
+    image: v4lentin4bc/microweb
+    ports:
+      - "80:80"
+    deploy:
+      replicas: 2
+    networks:
+      - mi_red
+    depends_on:
       - usuarios
       - asignaturas
+      - cursos
 
   haproxy:
-    build:
-      context: ./haproxy
-    container_name: haproxy
+    image: haproxy:latest
     volumes:
       - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
     ports:
-      - "80:80"
-    networks:
-      - mi_red
+      - "8081:80"  
+    deploy:
+      replicas: 1
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.2
     depends_on:
-      - web1
-      - web2
-
-  web1: 
-    build:
-      context: ./vista
-    container_name: web1
-    ports:
-      - "8080:80"
-    networks:
-      - mi_red
-    depends_on:
+      - web
       - usuarios
       - asignaturas
       - cursos
-
-  web2: 
-    build:
-      context: ./vista
-    container_name: web2
-    ports:
-      - "8081:80"
     networks:
       - mi_red
-    depends_on:
-      - usuarios
-      - asignaturas
-      - cursos
 
 networks:
   mi_red:
-    driver: bridge
+    driver: overlay
