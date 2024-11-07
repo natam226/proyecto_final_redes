@@ -74,19 +74,6 @@ services:
     depends_on:
       - cursosdb
 
-  graficas:
-    image: v4lentin4bc/micrograficas
-    deploy:
-      replicas: 2
-      placement:
-        constraints: 
-          - node.ip == 192.168.100.3
-    networks:
-      - mi_red
-    depends_on:
-      - usuarios
-      - cursos
-
   web:
     image: v4lentin4bc/microweb
     deploy:
@@ -102,7 +89,6 @@ services:
       - usuarios
       - asignaturas
       - cursos
-      - graficas
 
   haproxy:
     image: haproxy:latest
@@ -120,7 +106,6 @@ services:
       - usuarios
       - asignaturas
       - cursos
-      - graficas
     networks:
       - mi_red
 
