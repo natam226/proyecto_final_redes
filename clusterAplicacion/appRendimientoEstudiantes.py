@@ -2,7 +2,7 @@ from pyspark.sql import SparkSession
 
 # Inicia la sesión de Spark
 spark = SparkSession.builder.appName("Dashboard Información Estudiantes") \
-    .config("spark.jars", "/home/vagrant/mysql-connector-java.jar") \
+    .config("spark.jars", "/home/vagrant/mysql-connector-j_9.1.0-1ubuntu22.04_all.deb") \
     .getOrCreate()
 
 # URLs de conexión JDBC para MySQL
