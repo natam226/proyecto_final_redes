@@ -119,6 +119,7 @@ services:
       - mi_red
 
   spark-master:
+    image: bitnami/spark:latest
     build: ./clusterAplicacion
     environment:
       - SPARK_MODE=master
@@ -128,6 +129,7 @@ services:
       - mi_red
 
   spark-worker:
+    image: bitnami/spark:latest
     build: ./clusterAplicacion
     environment:
       - SPARK_MODE=worker
