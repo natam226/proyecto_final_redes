@@ -40,6 +40,8 @@ services:
 
   usuarios:
     image: v4lentin4bc/microusuarios
+    ports:
+      - "3005:3005"
     deploy:
       replicas: 2
       placement:
@@ -52,6 +54,8 @@ services:
 
   asignaturas:
     image: v4lentin4bc/microasignaturas
+    ports:
+      - "3006:3006"
     deploy:
       replicas: 2
       placement:
@@ -64,6 +68,8 @@ services:
 
   cursos:
     image: v4lentin4bc/microcursos
+    ports:
+      - "3007:3007"
     deploy:
       replicas: 2
       placement:
@@ -81,8 +87,6 @@ services:
       placement:
         constraints: 
           - node.ip == 192.168.100.3
-    ports:
-      - "8080:80"
     networks:
       - mi_red
     depends_on:
@@ -95,7 +99,7 @@ services:
     volumes:
       - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
     ports:
-      - "80:80"   # Puerta de entrada al balanceador de carga
+      - "8080:80"   # Puerta de entrada al balanceador de carga
     deploy:
       replicas: 1
       placement:
