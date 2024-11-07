@@ -6,8 +6,8 @@ spark = SparkSession.builder.appName("Dashboard Información Estudiantes") \
     .getOrCreate()
 
 # URLs de conexión JDBC para MySQL
-jdbc_url = "jdbc:mysql://localhost:3306/usuariosdb"
-jdbc_url_2 = "jdbc:mysql://localhost:3306/cursosdb"
+jdbc_url_usuarios = "jdbc:mysql://usuariosdb:3306/usuariosdb"
+jdbc_url_cursos = "jdbc:mysql://cursosdb:3306/cursosdb"
 connection_properties = {
     "user": "root",
     "password": "password",
@@ -15,8 +15,8 @@ connection_properties = {
 }
 
 # Leer las tablas de MySQL
-df_estudiantes = spark.read.jdbc(url=jdbc_url, table="estudiantes", properties=connection_properties)
-df_cursos = spark.read.jdbc(url=jdbc_url_2, table="cursos", properties=connection_properties)
+df_estudiantes = spark.read.jdbc(url=jdbc_url_usuarios, table="estudiantes", properties=connection_properties)
+df_cursos = spark.read.jdbc(url=jdbc_url_cursos, table="cursos", properties=connection_properties)
 
 # Crear vistas temporales
 df_estudiantes.createOrReplaceTempView("estudiantes")
