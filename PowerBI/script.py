@@ -9,15 +9,15 @@ client = bigquery.Client()
 # Define el dataset
 dataset_id = 'datosdashboardestudiantes.datosestudiantes'
 
-# Lista de CSVs y sus correspondientes IDs de tabla
+# Lista de subcarpetas y sus correspondientes IDs de tabla
 csv_files = [
-    ("rendimiento_genero.csv", "datosdashboardestudiantes.datosestudiantes.rendimiento_genero"),
-    ("rendimiento_estado_civil.csv", "datosdashboardestudiantes.datosestudiantes.rendimiento_estado_civil"),
-    ("rendimiento_necesidadesEspeciales.csv", "datosdashboardestudiantes.datosestudiantes.rendimiento_necesidadesEspeciales"),
-    ("rendimiento_beca.csv", "datosdashboardestudiantes.datosestudiantes.rendimiento_beca"),
-    ("rendimiento_pais.csv", "datosdashboardestudiantes.datosestudiantes.rendimiento_pais"),
-    ("rendimiento_prestamo.csv", "datosdashboardestudiantes.datosestudiantes.rendimiento_prestamo"),
-    ("rendimiento_desplazado.csv", "datosdashboardestudiantes.datosestudiantes.rendimiento_desplazado")
+    ("rendimiento_genero/*.csv", "datosdashboardestudiantes.datosestudiantes.rendimiento_genero"),
+    ("rendimiento_estado_civil/*.csv", "datosdashboardestudiantes.datosestudiantes.rendimiento_estado_civil"),
+    ("rendimiento_necesidadesEspeciales/*.csv", "datosdashboardestudiantes.datosestudiantes.rendimiento_necesidadesEspeciales"),
+    ("rendimiento_beca/*.csv", "datosdashboardestudiantes.datosestudiantes.rendimiento_beca"),
+    ("rendimiento_pais/*.csv", "datosdashboardestudiantes.datosestudiantes.rendimiento_pais"),
+    ("rendimiento_prestamo/*.csv", "datosdashboardestudiantes.datosestudiantes.rendimiento_prestamo"),
+    ("rendimiento_desplazado/*.csv", "datosdashboardestudiantes.datosestudiantes.rendimiento_desplazado")
 ]
 
 # Directorio donde se encuentran los CSVs
@@ -31,13 +31,13 @@ job_config = bigquery.LoadJobConfig(
 )
 
 # Carga cada CSV a BigQuery
-for csv_file, table_id in csv_files:
-    csv_file_path = os.path.join(output_dir, csv_file)
+for csv_subpath, table_id in csv_files:
+    csv_file_path = os.path.join(output_dir, csv_subpath)
     
     with open(csv_file_path, "rb") as source_file:
-        job = client.load_table_from_file(source_file, f"{dataset_id}.{table_id}", job_config=job_config)
+        job = client.load_table_from_file(source_file, table_id, job_config=job_config)
     
     job.result()  # Espera a que el trabajo se complete
-    print(f"Cargados {job.output_rows} filas en {dataset_id}:{table_id}.")
+    print(f"Cargados {job.output_rows} filas en {table_id}.")
 
 print("Todos los archivos CSV han sido subidos a BigQuery exitosamente.")
