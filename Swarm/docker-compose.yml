@@ -9,6 +9,8 @@ services:
       placement:
         constraints: 
           - node.ip == 192.168.100.2
+    volumes:
+      - ./db/usuariosdb/:/docker-entrypoint-initdb.d
     networks:
       - mi_red
 
@@ -22,6 +24,8 @@ services:
       placement:
         constraints: 
           - node.ip == 192.168.100.3
+    volumes:
+      - ./db/asignaturasdb/:/docker-entrypoint-initdb.d
     networks:
       - mi_red
 
@@ -35,6 +39,8 @@ services:
       placement:
         constraints: 
           - node.ip == 192.168.100.2
+    volumes:
+      - ./db/cursosdb/:/docker-entrypoint-initdb.d
     networks:
       - mi_red
 
