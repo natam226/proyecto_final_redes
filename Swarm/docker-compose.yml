@@ -84,9 +84,6 @@ services:
     image: v4lentin4bc/microweb
     deploy:
       replicas: 2
-      placement:
-        constraints: 
-          - node.ip == 192.168.100.3
     networks:
       - mi_red
     depends_on:
