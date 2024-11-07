@@ -1,0 +1,41 @@
+from google.cloud import bigquery
+import os
+
+# Configura el cliente de BigQuery
+client = bigquery.Client()
+
+# Define el dataset
+dataset_id = 'datosdashboardestudiantes.datosestudiantes'
+
+# Lista de CSVs y sus correspondientes IDs de tabla
+csv_files = [
+    ("rendimiento_genero.csv", "datosdashboardestudiantes.datosestudiantes.rendimiento_genero"),
+    ("rendimiento_estado_civil.csv", "datosdashboardestudiantes.datosestudiantes.rendimiento_estado_civil"),
+    ("rendimiento_necesidadesEspeciales.csv", "datosdashboardestudiantes.datosestudiantes.rendimiento_necesidadesEspeciales"),
+    ("rendimiento_beca.csv", "datosdashboardestudiantes.datosestudiantes.rendimiento_beca"),
+    ("rendimiento_pais.csv", "datosdashboardestudiantes.datosestudiantes.rendimiento_pais"),
+    ("rendimiento_prestamo.csv", "datosdashboardestudiantes.datosestudiantes.rendimiento_prestamo"),
+    ("rendimiento_desplazado.csv", "datosdashboardestudiantes.datosestudiantes.rendimiento_desplazado")
+]
+
+# Directorio donde se encuentran los CSVs
+output_dir = "/home/vagrant/clusterAnalisis/"
+
+# Configura la carga de datos
+job_config = bigquery.LoadJobConfig(
+    source_format=bigquery.SourceFormat.CSV,
+    skip_leading_rows=1,  # Si tienes encabezados
+    autodetect=True,  # Detecta automáticamente el esquema
+)
+
+# Carga cada CSV a BigQuery
+for csv_file, table_id in csv_files:
+    csv_file_path = os.path.join(output_dir, csv_file)
+    
+    with open(csv_file_path, "rb") as source_file:
+        job = client.load_table_from_file(source_file, f"{dataset_id}.{table_id}", job_config=job_config)
+    
+    job.result()  # Espera a que el trabajo se complete
+    print(f"Cargados {job.output_rows} filas en {dataset_id}:{table_id}.")
+
+print("Todos los archivos CSV han sido subidos a BigQuery exitosamente.")
