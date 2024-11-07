@@ -118,25 +118,6 @@ services:
     networks:
       - mi_red
 
-  spark-master:
-    image: bitnami/spark:latest
-    build: /clusterAplicacion
-    environment:
-      - SPARK_MODE=master
-      - SPARK_MASTER_HOST=spark-master
-      - SPARK_MASTER_PORT=7077
-    networks:
-      - mi_red
-
-  spark-worker:
-    image: bitnami/spark:latest
-    build: /clusterAplicacion
-    environment:
-      - SPARK_MODE=worker
-      - SPARK_MASTER=spark://spark-master:7077
-    networks:
-      - mi_red
-
 networks:
   mi_red:
     driver: overlay
