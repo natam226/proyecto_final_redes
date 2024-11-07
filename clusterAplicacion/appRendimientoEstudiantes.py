@@ -6,8 +6,8 @@ spark = SparkSession.builder.appName("Dashboard Información Estudiantes") \
     .getOrCreate()
 
 # URLs de conexión JDBC para MySQL
-jdbc_url_usuarios = "jdbc:mysql://usuariosdb:3306/usuariosdb"
-jdbc_url_cursos = "jdbc:mysql://cursosdb:3306/cursosdb"
+jdbc_url_usuarios = "jdbc:mysql://192.168.100.2:3306/usuariosdb"
+jdbc_url_cursos = "jdbc:mysql://192.168.100.2:3306/cursosdb"
 connection_properties = {
     "password": "password",
     "driver": "com.mysql.cj.jdbc.Driver"
