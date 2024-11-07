@@ -119,7 +119,7 @@ services:
       - mi_red
 
   spark-master:
-    image: bitnami/spark:latest
+    build: ./clusterAplicacion
     environment:
       - SPARK_MODE=master
       - SPARK_MASTER_HOST=spark-master
@@ -128,7 +128,7 @@ services:
       - mi_red
 
   spark-worker:
-    image: bitnami/spark:latest
+    build: ./clusterAplicacion
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER=spark://spark-master:7077
