@@ -120,7 +120,7 @@ services:
 
   spark-master:
     image: bitnami/spark:latest
-    build: ./clusterAplicacion
+    build: /clusterAplicacion
     environment:
       - SPARK_MODE=master
       - SPARK_MASTER_HOST=spark-master
@@ -130,7 +130,7 @@ services:
 
   spark-worker:
     image: bitnami/spark:latest
-    build: ./clusterAplicacion
+    build: /clusterAplicacion
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER=spark://spark-master:7077
