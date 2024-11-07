@@ -1,6 +1,8 @@
 from google.cloud import bigquery
 import os
 
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/vagrant/datosdashboardestudiantes-868d39a47bd5.json"
+
 # Configura el cliente de BigQuery
 client = bigquery.Client()
 
