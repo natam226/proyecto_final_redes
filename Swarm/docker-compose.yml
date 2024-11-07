@@ -82,6 +82,8 @@ services:
 
   web:
     image: v4lentin4bc/microweb
+    ports:
+      - "80:80"
     deploy:
       replicas: 2
     networks:
