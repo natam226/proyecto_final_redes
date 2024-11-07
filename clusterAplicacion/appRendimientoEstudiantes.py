@@ -9,7 +9,6 @@ spark = SparkSession.builder.appName("Dashboard Información Estudiantes") \
 jdbc_url_usuarios = "jdbc:mysql://usuariosdb:3306/usuariosdb"
 jdbc_url_cursos = "jdbc:mysql://cursosdb:3306/cursosdb"
 connection_properties = {
-    "user": "root",
     "password": "password",
     "driver": "com.mysql.cj.jdbc.Driver"
 }
