@@ -135,23 +135,20 @@ El repositorio está estructurado de la siguiente manera:
   
   Ingrese al siguiente enlace [http://192.168.100.2](http://192.168.100.2) para acceder a la página de la aplicación.
   
-  - Para ingresar como estudiante, utilice las siguientes credenciales de prueba:
-    
-     Usuario: aabrashkovu
-    
-    Contraseña: lI49GSLJ
-          
-  - Para ingresar como profesor utilice las siguientes credenciales de prueba:
-      
-    Usuario: aalvy4w
-    
-    Contraseña: iI157KRhMjBvN
-          
-- Para ingresar como el Director, utilice las siguientes credenciales de prueba:
-      
-   Usuario: director
-  
-  Contraseña: 1234
+Para ingresar como **Estudiante**, utilice las siguientes credenciales:
+
+- **Usuario**: `aabrashkovu`
+- **Contraseña**: `lI49GSLJ`
+
+Para ingresar como **Profesor**, utilice las siguientes credenciales:
+
+- **Usuario**: `aalvy4w`
+- **Contraseña**: `iI157KRhMjBvN`
+
+Para ingresar como **Director**, utilice las siguientes credenciales:
+
+- **Usuario**: `director`
+- **Contraseña**: `1234`
 
 De acuerdo al usuario que escoja, se le presentará información diferente, en caso de entrar como estudiante usted podrá: 
 
