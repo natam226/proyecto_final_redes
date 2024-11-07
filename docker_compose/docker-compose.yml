@@ -92,7 +92,7 @@ services:
       context: ./vista
     container_name: web1
     ports:
-      - "8080:80"
+      - "8081:80"
     networks:
       - mi_red
     depends_on:
@@ -105,7 +105,7 @@ services:
       context: ./vista
     container_name: web2
     ports:
-      - "8081:80"
+      - "8082:80"
     networks:
       - mi_red
     depends_on:
