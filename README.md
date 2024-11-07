@@ -15,8 +15,10 @@ El proyecto consiste en una plataforma para la gestión centralizada de programa
 ## Tabla de Contenidos
 1. [Requisitos](https://github.com/natam226/proyecto_final_redes?tab=readme-ov-file#requisitos)
 2. [Estructura](https://github.com/natam226/proyecto_final_redes?tab=readme-ov-file#estructura)
-3. [Instalación](https://github.com/natam226/proyecto_final_redes?tab=readme-ov-file#instalación)
-4. [Uso](https://github.com/natam226/proyecto_final_redes?tab=readme-ov-file#uso)
+3. [Limpieza](https://github.com/natam226/proyecto_final_redes?tab=readme-ov-file#limpieza)
+4. [Instalación](https://github.com/natam226/proyecto_final_redes?tab=readme-ov-file#instalación)
+5. [Uso](https://github.com/natam226/proyecto_final_redes?tab=readme-ov-file#uso)
+
 
 ## Requisitos
 La arquitectura está diseñada para ser desplegada en dos servidores Linux. Para que el proyecto funcione es necesario instalar las siguientes dependencias en estos servidores (despliegue cada dependencia para obtener la guía para instalarla): 
@@ -99,6 +101,24 @@ El repositorio está estructurado de la siguiente manera:
     └── vista
 
    ```
+
+## Limpieza 
+Antes de comenzar la instalación, y configuración del entorno, es recomendable detener procesos en el puerto 80 y eliminar volúmenes e imágenes de Docker sin utilizar. Siga estos pasos: 
+  1. Detener servicios en el puerto 80:
+     ```bash
+      sudo fuser -k 80/tcp
+       ```
+  2. Eliminar volúmenes no utilizados:
+     ```bash
+      docker volume prune -f
+       ```
+  3. Eliminar imágenes no utilizadas:
+      ```bash
+      docker image prune -a -f
+
+       ```
+Luego de hacer esto,es posible que la instalación será más limpia y esté libre de conflictos.
+
 ## Instalación
   Siga estos pasos para instalar el proyecto
   1. Clone este repositorio
