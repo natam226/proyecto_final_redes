@@ -23,7 +23,7 @@ services:
       replicas: 1
       placement:
         constraints: 
-          - node.ip == 192.168.100.3
+          - node.ip == 192.168.100.2
     volumes:
       - ./db/asignaturasdb/:/docker-entrypoint-initdb.d
     networks:
