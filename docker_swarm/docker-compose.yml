@@ -1,0 +1,123 @@
+services:
+  usuariosdb:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: usuariosdb
+    deploy:
+      replicas: 1
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.2
+    volumes:
+      - ./db/usuariosdb/:/docker-entrypoint-initdb.d
+    networks:
+      - mi_red
+
+  asignaturasdb:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: asignaturasdb
+    deploy:
+      replicas: 1
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.2
+    volumes:
+      - ./db/asignaturasdb/:/docker-entrypoint-initdb.d
+    networks:
+      - mi_red
+
+  cursosdb:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: cursosdb
+    deploy:
+      replicas: 1
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.2
+    volumes:
+      - ./db/cursosdb/:/docker-entrypoint-initdb.d
+    networks:
+      - mi_red
+
+  usuarios:
+    image: v4lentin4bc/microusuarios
+    ports:
+      - "3005:3005"
+    deploy:
+      replicas: 2
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.2
+    networks:
+      - mi_red
+    depends_on:
+      - usuariosdb
+
+  asignaturas:
+    image: v4lentin4bc/microasignaturas
+    ports:
+      - "3006:3006"
+    deploy:
+      replicas: 2
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.3
+    networks:
+      - mi_red
+    depends_on:
+      - asignaturasdb
+
+  cursos:
+    image: v4lentin4bc/microcursos
+    ports:
+      - "3007:3007"
+    deploy:
+      replicas: 2
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.2
+    networks:
+      - mi_red
+    depends_on:
+      - cursosdb
+
+  web:
+    image: v4lentin4bc/microweb
+    ports:
+      - "80:80"
+    deploy:
+      replicas: 2
+    networks:
+      - mi_red
+    depends_on:
+      - usuarios
+      - asignaturas
+      - cursos
+
+  haproxy:
+    image: haproxy:latest
+    volumes:
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    ports:
+      - "8081:80"  
+    deploy:
+      replicas: 1
+      placement:
+        constraints: 
+          - node.ip == 192.168.100.2
+    depends_on:
+      - web
+      - usuarios
+      - asignaturas
+      - cursos
+    networks:
+      - mi_red
+
+networks:
+  mi_red:
+    driver: overlay
