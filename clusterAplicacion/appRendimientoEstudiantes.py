@@ -22,12 +22,12 @@ rendimiento_desplazado = spark.sql("SELECT e.desplazado, c.nombreCurso, c.nota, 
 
 # Exporta cada DataFrame como CSV
 output_dir = "/home/vagrant/clusterAnalisis/"
-rendimiento_genero.write.csv(f"{output_dir}/rendimiento_genero.csv", header=True, mode="overwrite")
-rendimiento_estado_civil.write.csv(f"{output_dir}/rendimiento_estado_civil.csv", header=True, mode="overwrite")
-rendimiento_necesidadesEspeciales.write.csv(f"{output_dir}/rendimiento_necesidadesEspeciales.csv", header=True, mode="overwrite")
-rendimiento_beca.write.csv(f"{output_dir}/rendimiento_beca.csv", header=True, mode="overwrite")
-rendimiento_pais.write.csv(f"{output_dir}/rendimiento_pais.csv", header=True, mode="overwrite")
-rendimiento_prestamo.write.csv(f"{output_dir}/rendimiento_prestamo.csv", header=True, mode="overwrite")
-rendimiento_desplazado.write.csv(f"{output_dir}/rendimiento_desplazado.csv", header=True, mode="overwrite")
+rendimiento_genero.write.csv(f"{output_dir}/rendimiento_genero", header=True, mode="overwrite")
+rendimiento_estado_civil.write.csv(f"{output_dir}/rendimiento_estado_civil", header=True, mode="overwrite")
+rendimiento_necesidadesEspeciales.write.csv(f"{output_dir}/rendimiento_necesidadesEspeciales", header=True, mode="overwrite")
+rendimiento_beca.write.csv(f"{output_dir}/rendimiento_beca", header=True, mode="overwrite")
+rendimiento_pais.write.csv(f"{output_dir}/rendimiento_pais", header=True, mode="overwrite")
+rendimiento_prestamo.write.csv(f"{output_dir}/rendimiento_prestamo", header=True, mode="overwrite")
+rendimiento_desplazado.write.csv(f"{output_dir}/rendimiento_desplazado", header=True, mode="overwrite")
 
 print("CSV files generated successfully.")
