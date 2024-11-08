@@ -160,11 +160,11 @@ Antes de comenzar la instalación, y configuración del entorno, es recomendable
       ```
 
 ## Uso
-  > **Nota**: Si desea ver las estadísticas de HAProxy, ingrese al siguiente enlace: [http://192.168.100.2/haproxy?stats](http://192.168.100.2:8081/haproxy?stats)
+  > **Nota**: Si desea ver las estadísticas de HAProxy, ingrese al siguiente enlace: [http://192.168.100.2:8081/haproxy?stats](http://192.168.100.2:8081/haproxy?stats) y acceda con las credenciales: usuario: `admin`; contraseña: `admin`.
   
   Ingrese al siguiente enlace [http://192.168.100.2:8081](http://192.168.100.2:8081) para acceder a la página de la aplicación.
 
-  > **Nota**: Usar estos enlaces solo si su maquina tiene la misma direccion IP publica. En caso de que no, debe cambiar la IP en los enlaces anteriores por la direccion IP de su maquina.
+  > **Nota**: Usar estos enlaces solo si su maquina tiene la misma direccion IP. En caso de que no, debe cambiar la IP en los enlaces anteriores por la direccion IP de su maquina.
   
 Para ingresar como **Estudiante**, utilice las siguientes credenciales:
 
