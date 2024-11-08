@@ -208,3 +208,32 @@ En caso de entrar como administrador (director), usted podrá:
 - Ver su información de usuario.
 - Actualizar su información personal.
 - Ver gráficas de la información relacionada con los estudiantes. 
+
+## Clúster de procesamiento de datos
+  > **Nota**: Se debe tener instalada la última versión de Spark, la cual puede ser descargada [aquí](https://dlcdn.apache.org/spark/)
+1. Crear un directorio en /home/vagrant para almacenar los resultados:
+    ```bash
+      mkdir clusterAplicacion
+    ```
+2. Ingresar al directorio /sbin de Spark e iniciar un nodo master:
+   ```bash
+      cd /home/vagrant/labSpark/sparkspark-3.5.3-bin-hadoop3/sbin
+   ```
+   ```bash
+      ./spark-master.sh
+   ```
+3. En el mismo directorio iniciar un nodo worker:
+   ```bash
+      ./start-worker.sh spark://192.168.100.2:7077
+   ```
+4. Lanzar la aplicación en el directorio /bin de Spark:
+   ```bash
+      cd /home/vagrant/labSpark/sparkspark-3.5.3-bin-hadoop3/bin
+   ```
+   ```bash
+      ./spark-submit --master spark://192.168.100.2:7077 --conf spark.executor.memory=1g /root/proyecto_final_redes/clusterAplicacion/appRendimientoEstudiantes.py
+   ```
+5. Se puede copiar el directorio con los resultados al directorio compartido para realizar operaciones con los archivos CSV:
+   ```bash
+      cp -r /home/vagrant/clusterAplicacion /vagrant
+   ```
