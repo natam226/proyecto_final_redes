@@ -164,7 +164,7 @@ Antes de comenzar la instalación, y configuración del entorno, es recomendable
   
   Ingrese al siguiente enlace [http://192.168.100.2:8081](http://192.168.100.2:8081) para acceder a la página de la aplicación.
 
-  > **Nota**: Usar estos enlaces solo si su maquina tiene la misma direccion ip publica. En caso de que no, debe cambiar la ip en los enlaces anteriores por la direccion ip de su maquina.
+  > **Nota**: Usar estos enlaces solo si su maquina tiene la misma direccion IP publica. En caso de que no, debe cambiar la IP en los enlaces anteriores por la direccion IP de su maquina.
   
 Para ingresar como **Estudiante**, utilice las siguientes credenciales:
 
