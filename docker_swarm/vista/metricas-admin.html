@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -43,29 +42,48 @@
             background-color: #004080;
             transform: translateX(10px);
         }
+
         .content {
             margin-left: 260px;
             padding: 20px;
             background-color: white;
         }
+
         .card {
             background-color: #004080;
             border: none;
             color: white;
-            margin-bottom: 20px; /* Espacio entre las tarjetas */
-            border-radius: 15px 15px 15px 15px;
+            margin-bottom: 20px;
+            border-radius: 15px;
         }
+
         .card-title {
             color: #ffffff;
             font-weight: bold;
         }
+
         h1 {
             margin-bottom: 30px;
             color: #000000;
             font-weight: bold;
         }
+
+        /* Estilos para el iframe */
+        .iframe-container {
+            width: 100%;
+            height: 80vh; /* 80% de la altura visible */
+            margin-top: 20px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
     </style>
 </head>
+<body>
+
 <div class="sidebar">
     <a href="cursos-gestion.html">Gestión de Cursos</a>
     <a href="usuarios-gestion.html">Gestión de Usuarios</a>
@@ -73,12 +91,16 @@
     <a href="admin-perfil.html">Perfil Administrador</a>
     <a href="metricas-admin.html">Métricas</a>
     <a href="cerrar-sesion.html">Cerrar sesión</a>
-
 </div>
 
-    <div class="content">
-        <h1 class="my-4 text-center">Información de los estudiantes por notas acumuladas</h1>
+<div class="content">
+    <h1 class="my-4 text-center">Información de los estudiantes por notas acumuladas</h1>
+    
+    <!-- Contenedor para el iframe -->
+    <div class="iframe-container">
+        <iframe title="DashboardEstudiantes" src="https://app.powerbi.com/view?r=eyJrIjoiOWZmMjNiMzAtOWFlYy00NTM3LThlNDgtYmQ0YzViODQ3MDQxIiwidCI6IjY5M2NiZWEwLTRlZjktNDI1NC04OTc3LTc2ZTA1Y2I1ZjU1NiIsImMiOjR9" allowFullScreen="true"></iframe>
     </div>
-    <iframe title="DashboardEstudiantes" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiOWZmMjNiMzAtOWFlYy00NTM3LThlNDgtYmQ0YzViODQ3MDQxIiwidCI6IjY5M2NiZWEwLTRlZjktNDI1NC04OTc3LTc2ZTA1Y2I1ZjU1NiIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>
+</div>
+
 </body>
 </html>
