@@ -93,7 +93,7 @@ services:
       - cursosdb
 
   web:
-    image: v4lentin4bc/microweb
+    image: nataliam123/microweb
     ports:
       - "80:80"
     deploy:
