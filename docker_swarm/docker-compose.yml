@@ -1,6 +1,8 @@
 services:
   usuariosdb:
     image: mysql:5.7
+    ports:
+      - "32000:3306"
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: usuariosdb
@@ -16,6 +18,8 @@ services:
 
   asignaturasdb:
     image: mysql:5.7
+    ports:
+      - "32001:3306"
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: asignaturasdb
@@ -31,6 +35,8 @@ services:
 
   cursosdb:
     image: mysql:5.7
+    ports:
+      - "32002:3306"
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: cursosdb
