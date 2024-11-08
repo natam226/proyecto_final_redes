@@ -131,6 +131,9 @@ Antes de comenzar la instalación, y configuración del entorno, es recomendable
       ```bash
       git clone https://github.com/natam226/proyecto_final_redes
        ```
+      
+  > **Antes de ejecutar el repositorio, asegúrese de actualizar las direcciones IP**: Verifique que las direcciones IP configuradas en los archivos docker-compose.yml, haproxy.cfg, así como en las URLs definidas en los archivos de las vistas web y el controller del microservicio de cursos, estén actualizadas para reflejar la IP de su máquina. Si alguna de estas configuraciones no apunta a la dirección IP correcta, ajústelas antes de proceder con la ejecución.
+
   2. Navegue por el repositorio 
       ```bash
       cd proyecto_final_redes
@@ -160,6 +163,8 @@ Antes de comenzar la instalación, y configuración del entorno, es recomendable
   > **Nota**: Si desea ver las estadísticas de HAProxy, ingrese al siguiente enlace: [http://192.168.100.2/haproxy?stats](http://192.168.100.2:8081/haproxy?stats)
   
   Ingrese al siguiente enlace [http://192.168.100.2:8081](http://192.168.100.2:8081) para acceder a la página de la aplicación.
+
+  > **Nota**: Usar estos enlaces solo si su maquina tiene la misma direccion ip publica. En caso de que no, debe cambiar la ip en los enlaces anteriores por la direccion ip de su maquina.
   
 Para ingresar como **Estudiante**, utilice las siguientes credenciales:
 
