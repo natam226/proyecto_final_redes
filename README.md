@@ -81,24 +81,32 @@ Instale git
 El repositorio está estructurado de la siguiente manera: 
   ```bash
   proyecto_final_redes
-├── docker_compose
-└── Swarm
-    ├── db
-    │   ├── asignaturasdb
-    │   ├── cursosdb
-    │   └── usuariosdb
-    ├── haproxy
-    ├── microservicios
-    │   ├── asignaturas
-    │   │   ├── node_modules
-    │   │   └── src
-    │   ├── cursos
-    │   │   ├── node_modules
-    │   │   └── src
-    │   └── usuarios
-    │       ├── node_modules
-    │       └── src
-    └── vista
+├── clusterAplicacion
+├── docker_swarm
+│   ├── db
+│   │   ├── asignaturasdb
+│   │   ├── cursosdb
+│   │   └── usuariosdb
+│   ├── haproxy
+│   ├── microservicios
+│   │   ├── asignaturas
+│   │   │   ├── node_modules
+│   │   │   └── src
+│   │   ├── cursos
+│   │   │   ├── node_modules
+│   │   │   └── src
+│   │   └── usuarios
+│   │       ├── node_modules
+│   │       └── src
+│   └── vista
+└── PowerBI
+    ├── rendimiento_beca
+    ├── rendimiento_desplazado
+    ├── rendimiento_estado_civil
+    ├── rendimiento_genero
+    ├── rendimiento_necesidadesEspeciales
+    ├── rendimiento_pais
+    └── rendimiento_prestamo
 
    ```
 
@@ -117,8 +125,6 @@ Antes de comenzar la instalación, y configuración del entorno, es recomendable
       docker image prune -a -f
 
        ```
-Luego de hacer esto,es posible que la instalación será más limpia y esté libre de conflictos.
-
 ## Instalación
   Siga estos pasos para instalar el proyecto
   1. Clone este repositorio
@@ -141,7 +147,7 @@ Luego de hacer esto,es posible que la instalación será más limpia y esté lib
      ```bash
       docker node ls
        ```
-  6. En la carpeta ./Swarm despliegue el docker-compose:
+  6. En la carpeta ./docker_swarm despliegue el docker-compose:
      ```bash
      docker stack deploy --compose-file docker-compose.yml academic_stack
       ```
