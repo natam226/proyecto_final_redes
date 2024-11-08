@@ -4,7 +4,6 @@ const connection = mysql.createPool({
     host: 'cursosdb',
     user: 'root',
     password: 'password',
-    port: '3306',
     database: 'cursosdb'
 });
 

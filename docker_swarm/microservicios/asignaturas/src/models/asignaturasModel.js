@@ -5,7 +5,6 @@ const connection = mysql.createPool({
     host: 'asignaturasdb',
     user: 'root',
     password: 'password',
-    port: '3306',
     database: 'asignaturasdb'
 });
 
