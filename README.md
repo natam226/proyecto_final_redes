@@ -1,5 +1,4 @@
 # Proyecto de redes e infraestructura: Aplicación para gestión académica
-El propósito de este proyecto es aplicar los conceptos aprendidos en el curso mediante el desarrollo de una aplicación web básica que resuelva un problema contextual. La aplicación está enfocada en la gestión de datos académicos mediante una arquitectura que resuelva el problema planteado y que a largo plazo sea escalable. 
 
 El proyecto consiste en una plataforma para la gestión centralizada de programas académicos. La aplicación permitirá a los estudiantes inscribirse en cursos, consultar calificaciones y seguir su rendimiento académico; a los profesores, gestionar cursos y registrar notas; y al administrador del programa, supervisar usuarios, cursos y asignaturas. Además, incluirá herramientas de análisis visual para evaluar el rendimiento estudiantil y explorar patrones socioeconómicos y demográficos, con el fin de mejorar la toma de decisiones y la calidad educativa. Además, cuenta con un clúster de procesamiento de datos para generar información de interés. 
 
@@ -32,7 +31,7 @@ La arquitectura está diseñada para ser desplegada en dos servidores Linux. Par
             sudo apt install apt-transport-https ca-certificates curl software-properties-common
             
   ```
-  instale algunos paquetes de requisitos previos que permitan a apt usar paquetes a través de HTTPS:
+  Instale algunos paquetes de requisitos previos que permitan a apt usar paquetes a través de HTTPS:
   ```bash
         curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
           
